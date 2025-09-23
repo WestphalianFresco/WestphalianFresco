@@ -48,6 +48,7 @@ My journey in computer science has led me to develop a passion for cybersecurity
   <img src="https://img.shields.io/badge/-A%2B-4D4D4D?style=for-the-badge&logo=CompTIA&logoColor=white" />
   <img src="https://img.shields.io/badge/-CDSA-006400?style=for-the-badge&logoColor=white" />
   <img src="https://img.shields.io/badge/-CCD-000080?style=for-the-badge&logoColor=white" />
+  <img src="https://img.shields.io/badge/AWS%20Certified-Cloud%20Practitioner-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" />
 </div>
 
 ## Projects
