@@ -358,6 +358,16 @@ function heroCard(data, t) {
     )
     .join('\n');
 
+  // Month labels sit under the column where each month begins, like GitHub's own calendar.
+  const starts = recent
+    .map((week, wi) => ({ month: Number(week[0].date.slice(5, 7)), x: gx + wi * (tile + gap) }))
+    .filter((s, i, all) => i === 0 || s.month !== all[i - 1].month);
+  // A partial first month gives way to the next label instead of crowding it.
+  if (starts.length > 1 && starts[1].x - starts[0].x < 3 * (tile + gap)) starts.shift();
+  const months = starts
+    .filter((s) => s.x < gx + gridW - 16)
+    .map((s) => `<text x="${s.x}" y="${gy + gridH + 24}" class="sans muted" font-size="11">${MONTHS[s.month - 1]}</text>`);
+
   const css = `
 .now{animation:pulse 2.4s ease-in-out infinite}
 .glow{animation:drift 16s ease-in-out infinite alternate}
@@ -380,7 +390,7 @@ function heroCard(data, t) {
 <circle class="glow" cx="${W - 120}" cy="40" r="260" fill="url(#g)"/>
 </g>
 ${tiles}
-<text x="${gx + gridW}" y="${gy + gridH + 26}" text-anchor="end" class="sans muted" font-size="11">last ${recent.length} weeks of activity</text>`;
+${months.join('\n')}`;
 
   return svg({
     width: W,
