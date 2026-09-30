@@ -1,36 +1,22 @@
 #!/usr/bin/env node
-// Renders the profile README cards (light + dark SVGs) and the stats table.
+// Renders the profile README cards as light and dark SVGs.
 // Only public data is queried, so the output never reveals private repositories.
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 
 const USER = process.env.PROFILE_USER ?? 'WestphalianFresco';
 const TOKEN = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN;
 const ASSETS = new URL('../assets/', import.meta.url);
-const README = new URL('../README.md', import.meta.url);
 
 // Notebooks store rendered output, which inflates their byte count.
 const EXCLUDED_LANGUAGES = new Set(['Jupyter Notebook']);
 const TOP_LANGUAGES = 5;
 // Fixed language-to-slot map so a language keeps its color when ranks shift.
-const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'HTML', 'JavaScript', 'CSS', 'Dart', 'C++', 'Shell'];
-
-const HERO = {
-  prompt: 'whoami',
-  lines: ['I build for web & mobile', 'with a security mindset.'],
-  chips: ['full-stack', 'mobile', 'security', 'applied crypto'],
-};
+const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'JavaScript', 'HTML', 'CSS', 'Dart', 'C++', 'Shell'];
 
 const FEATURED = [
   { repo: 'bid-estimator', tags: ['Next.js', 'Claude API', 'Vitest'] },
   { repo: 'openclaw-guide', tags: ['AWS Lightsail', 'self-hosted AI agent'] },
-];
-
-const TOOLBOX = [
-  ['Languages', ['TypeScript', 'Python', 'Dart', 'JavaScript', 'C++', 'SQL']],
-  ['Frameworks', ['React', 'Next.js', 'Flutter', 'Electron', 'Node.js']],
-  ['Platforms', ['Supabase', 'PostgreSQL', 'Firebase', 'AWS', 'GitHub Actions']],
-  ['Security', ['Wireshark', 'Nmap', 'Nessus', 'Splunk', 'post-quantum crypto']],
 ];
 
 // Neutrals follow GitHub's Primer scale; data colors come from a CVD-validated palette.
@@ -43,7 +29,6 @@ const THEMES = {
     ramp: ['#eff2f5', '#b7d3f6', '#6da7ec', '#2a78d6', '#184f95'],
     series: ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948'],
     other: '#8c959f',
-    headline: ['#2a78d6', '#0f8a5f'],
     glow: 0.10,
   },
   dark: {
@@ -54,7 +39,6 @@ const THEMES = {
     ramp: ['#1b2129', '#104281', '#1c5cab', '#3987e5', '#86b6ef'],
     series: ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#008300', '#9085e9', '#e66767'],
     other: '#6e7681',
-    headline: ['#3987e5', '#2fbf8a'],
     glow: 0.18,
   },
 };
@@ -62,9 +46,7 @@ const THEMES = {
 const W = 840;
 const PAD = 24;
 const SANS = '-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans&quot;,Helvetica,Arial,sans-serif';
-const MONO = 'ui-monospace,SFMono-Regular,&quot;SF Mono&quot;,Menlo,Consolas,&quot;Liberation Mono&quot;,monospace';
-const MONO_ADVANCE = 0.6; // em per glyph; the widest of the mono stack
-const SANS_ADVANCE = 0.56; // conservative average for wrapping prose
+const SANS_ADVANCE = 0.56; // conservative average glyph width, in em
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -256,7 +238,7 @@ function languageShares(repos) {
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fmt = (n) => n.toLocaleString('en-US');
 const pct = (x) => `${(x * 100).toFixed(x >= 0.1 ? 0 : 1)}%`;
-const monoWidth = (text, size) => text.length * size * MONO_ADVANCE;
+const textWidth = (text, size) => text.length * size * SANS_ADVANCE;
 
 function shortDate(date, withYear = false) {
   const [y, m, d] = date.split('-').map(Number);
@@ -320,7 +302,6 @@ function svg({ width, height, title, desc, t, body, css = '' }) {
 <desc id="d">${esc(desc)}</desc>
 <style>
 .sans{font-family:${SANS}}
-.mono{font-family:${MONO}}
 .ink{fill:${t.ink}}.ink2{fill:${t.ink2}}.muted{fill:${t.muted}}
 .h{font-size:14px;font-weight:600}
 .sub{font-size:12px}
@@ -338,12 +319,12 @@ function header(title, subtitle) {
 }
 
 function chip(x, y, label, t, size = 12) {
-  const w = Math.round(monoWidth(label, size) + 20);
+  const w = Math.round(textWidth(label, size) + 20);
   const h = size + 12;
   return {
     width: w,
     markup: `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${t.raised}" stroke="${t.border}"/>
-<text x="${x + w / 2}" y="${y + h / 2 + size * 0.35}" text-anchor="middle" class="mono ink2" font-size="${size}">${esc(label)}</text>`,
+<text x="${x + w / 2}" y="${y + h / 2 + size * 0.35}" text-anchor="middle" class="sans ink2" font-size="${size}">${esc(label)}</text>`,
   };
 }
 
@@ -356,14 +337,17 @@ function level(count, max) {
 // ---------- cards ----------
 
 function heroCard(data, t) {
-  const H = 232;
-  const recent = data.weeks.slice(-14);
-  const max = Math.max(...recent.flat().map((d) => d.contributionCount));
   const tile = 14;
   const gap = 4;
+  const inset = 48;
+  const count = Math.floor((W - inset * 2 + gap) / (tile + gap));
+  const recent = data.weeks.slice(-count);
+  const max = Math.max(...recent.flat().map((d) => d.contributionCount));
   const gridW = recent.length * (tile + gap) - gap;
-  const gx = W - 48 - gridW;
-  const gy = 50;
+  const gridH = 7 * (tile + gap) - gap;
+  const gx = (W - gridW) / 2;
+  const gy = 40;
+  const H = gy + gridH + 48;
   // Tiles stay static because stalled animations can leave them invisible; only today pulses.
   const tiles = recent
     .flatMap((week, wi) =>
@@ -374,34 +358,18 @@ function heroCard(data, t) {
     )
     .join('\n');
 
-  let cx = 48;
-  const chips = HERO.chips
-    .map((label) => {
-      const c = chip(cx, 168, label, t);
-      cx += c.width + 8;
-      return c.markup;
-    })
-    .join('\n');
-
   const css = `
-.head{font-size:30px;font-weight:650;letter-spacing:-0.02em}
-.cursor{animation:blink 1.1s steps(1) infinite}
 .now{animation:pulse 2.4s ease-in-out infinite}
 .glow{animation:drift 16s ease-in-out infinite alternate}
-@keyframes blink{50%{opacity:0}}
 @keyframes pulse{50%{opacity:.35}}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-60px,24px)}}
-@media (prefers-reduced-motion:reduce){.cursor,.now,.glow{animation:none}}`;
+@media (prefers-reduced-motion:reduce){.now,.glow{animation:none}}`;
 
   const body = `<defs>
 <radialGradient id="g" cx="0.5" cy="0.5" r="0.5">
 <stop offset="0" stop-color="${t.accent}" stop-opacity="${t.glow}"/>
 <stop offset="1" stop-color="${t.accent}" stop-opacity="0"/>
 </radialGradient>
-<linearGradient id="hl" x1="0" x2="1" y1="0" y2="0">
-<stop offset="0" stop-color="${t.headline[0]}"/>
-<stop offset="1" stop-color="${t.headline[1]}"/>
-</linearGradient>
 <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
 <circle cx="1" cy="1" r="1" fill="${t.border}" opacity="0.55"/>
 </pattern>
@@ -411,20 +379,16 @@ function heroCard(data, t) {
 <rect width="${W}" height="${H}" fill="url(#dots)" opacity="0.6"/>
 <circle class="glow" cx="${W - 120}" cy="40" r="260" fill="url(#g)"/>
 </g>
-<text x="48" y="56" class="mono sub"><tspan fill="${t.accent}">❯</tspan><tspan class="ink2"> ${esc(HERO.prompt)}</tspan></text>
-<text x="48" y="102" class="sans head ink">${esc(HERO.lines[0])}</text>
-<text x="48" y="140" class="sans head"><tspan fill="url(#hl)">${esc(HERO.lines[1])}</tspan><tspan class="cursor" fill="${t.accent}">▍</tspan></text>
-${chips}
 ${tiles}
-<text x="${gx + gridW}" y="${gy + 7 * (tile + gap) + 14}" text-anchor="end" class="mono muted" font-size="10">last ${recent.length} weeks of activity</text>`;
+<text x="${gx + gridW}" y="${gy + gridH + 26}" text-anchor="end" class="sans muted" font-size="11">last ${recent.length} weeks of activity</text>`;
 
   return svg({
     width: W,
     height: H,
     t,
     css,
-    title: `${USER}: ${HERO.lines.join(' ')}`,
-    desc: `Profile banner with a mosaic of the last ${recent.length} weeks of contribution activity.`,
+    title: `${USER} contribution mosaic`,
+    desc: `Mosaic of the last ${recent.length} weeks of contribution activity.`,
     body,
   });
 }
@@ -523,9 +487,9 @@ function activityCard(data, t) {
   const ticks = [];
   for (let v = step; v <= yMax; v += step) {
     ticks.push(`<line x1="${left}" x2="${right}" y1="${y(v) + 0.5}" y2="${y(v) + 0.5}" stroke="${t.grid}"/>
-<text x="${left - 8}" y="${y(v) + 3.5}" text-anchor="end" class="mono muted" font-size="10">${fmt(v)}</text>`);
+<text x="${left - 8}" y="${y(v) + 3.5}" text-anchor="end" class="sans muted" font-size="11">${fmt(v)}</text>`);
   }
-  ticks.push(`<text x="${left - 8}" y="${bottom + 3.5}" text-anchor="end" class="mono muted" font-size="10">0</text>`);
+  ticks.push(`<text x="${left - 8}" y="${bottom + 3.5}" text-anchor="end" class="sans muted" font-size="11">0</text>`);
 
   const peakIndex = weeks.reduce((best, w, i) => (w.total > weeks[best].total ? i : best), 0);
   const bars = weeks
@@ -540,7 +504,7 @@ function activityCard(data, t) {
   if (max > 0) {
     const px = left + peakIndex * slot + slot / 2;
     const anchor = px > right - 60 ? 'end' : px < left + 60 ? 'start' : 'middle';
-    peakLabel = `<text x="${px}" y="${y(max) - 8}" text-anchor="${anchor}" class="mono ink2" font-size="10">peak ${fmt(max)} · wk of ${shortDate(weeks[peakIndex].start)}</text>`;
+    peakLabel = `<text x="${px}" y="${y(max) - 8}" text-anchor="${anchor}" class="sans ink2" font-size="11">peak ${fmt(max)} · wk of ${shortDate(weeks[peakIndex].start)}</text>`;
   }
 
   const monthLabels = [];
@@ -550,7 +514,7 @@ function activityCard(data, t) {
     const prevMonth = i ? Number(weeks[i - 1].start.slice(5, 7)) : null;
     const x = left + i * slot;
     if (i && month !== prevMonth && x - lastX >= 30 && x < right - 16) {
-      monthLabels.push(`<text x="${x}" y="${bottom + 18}" class="mono muted" font-size="10">${MONTHS[month - 1]}</text>`);
+      monthLabels.push(`<text x="${x}" y="${bottom + 18}" class="sans muted" font-size="11">${MONTHS[month - 1]}</text>`);
       lastX = x;
     }
   });
@@ -568,9 +532,9 @@ function activityCard(data, t) {
       const ry = top + 4 + i * rowH;
       const w = d.total ? Math.max(3, (d.share / wdMax) * barMax) : 0;
       const fill = d.share === peakDay.share ? t.accent : t.accentSoft;
-      return `<text x="${wx}" y="${ry + 9}" class="mono muted" font-size="10">${d.day}</text>
+      return `<text x="${wx}" y="${ry + 9}" class="sans muted" font-size="11">${d.day}</text>
 ${w ? `<path d="${barPath(barX, ry, w, 10, 4)}" fill="${fill}"/>` : ''}
-<text x="${barX + w + 6}" y="${ry + 9}" class="mono ink2" font-size="10">${pct(d.share)}</text>`;
+<text x="${barX + w + 6}" y="${ry + 9}" class="sans ink2" font-size="11">${pct(d.share)}</text>`;
     })
     .join('\n');
 
@@ -620,11 +584,11 @@ function languagesCard(langs, t) {
     .map((l, i) => {
       const lx = x0 + i * colW;
       return `<circle cx="${lx + 5}" cy="${by + 42}" r="5" fill="${colorOf(l.name)}"/>
-<text x="${lx + 16}" y="${by + 46}" class="mono" font-size="12"><tspan class="ink">${esc(l.name)}</tspan><tspan class="ink2" dx="6">${pct(l.share)}</tspan></text>`;
+<text x="${lx + 16}" y="${by + 46}" class="sans" font-size="12"><tspan class="ink">${esc(l.name)}</tspan><tspan class="ink2" dx="6">${pct(l.share)}</tspan></text>`;
     })
     .join('\n');
 
-  const body = `${header('Languages', 'Share of code across public repositories · notebooks excluded')}
+  const body = `${header('Stack composition', 'Share of code across public repositories · notebooks excluded')}
 <clipPath id="bar"><rect x="${x0}" y="${by}" width="${width}" height="${bh}" rx="6"/></clipPath>
 <g clip-path="url(#bar)">${segments}</g>
 ${legend}`;
@@ -633,7 +597,7 @@ ${legend}`;
     width: W,
     height: H,
     t,
-    title: 'Languages',
+    title: 'Stack composition',
     desc: langs.map((l) => `${l.name} ${pct(l.share)}`).join(', '),
     body,
   });
@@ -642,9 +606,9 @@ ${legend}`;
 function projectCard(repo, t, today) {
   const CW = 410;
   const H = 176;
-  const lines = wrap(repo.description ?? 'No description yet.', 13, CW - 40, 2);
+  const lines = wrap(repo.description ?? 'No description yet.', 12, CW - 40, 2);
   const desc = lines
-    .map((line, i) => `<text x="20" y="${70 + i * 19}" class="sans ink2" font-size="13">${esc(line)}</text>`)
+    .map((line, i) => `<text x="20" y="${70 + i * 18}" class="sans ink2" font-size="12">${esc(line)}</text>`)
     .join('\n');
 
   let cx = 20;
@@ -669,8 +633,8 @@ function projectCard(repo, t, today) {
   footer.push(`<text x="${CW - 20}" y="156" text-anchor="end" class="sans muted" font-size="12">${relativeTime(repo.pushedAt, today)}</text>`);
 
   const body = `<path transform="translate(20,24)" fill="${t.muted}" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
-<text x="44" y="37" class="sans ink" font-size="15" font-weight="600">${esc(repo.name)}</text>
-<text x="${CW - 20}" y="37" text-anchor="end" class="sans muted" font-size="15">↗</text>
+<text x="44" y="37" class="sans ink" font-size="14" font-weight="600">${esc(repo.name)}</text>
+<text x="${CW - 20}" y="37" text-anchor="end" class="sans muted" font-size="14">↗</text>
 ${desc}
 ${tags}
 <line x1="20" x2="${CW - 20}" y1="134.5" y2="134.5" stroke="${t.grid}"/>
@@ -684,79 +648,6 @@ ${footer.join('\n')}`;
     desc: repo.description ?? repo.name,
     body,
   });
-}
-
-function toolboxCard(t) {
-  const rowH = 36;
-  const top = 72;
-  const H = top + TOOLBOX.length * rowH + 12;
-  const rows = TOOLBOX.map(([label, items], r) => {
-    const y = top + r * rowH;
-    let x = PAD + 112;
-    const chips = items
-      .map((item) => {
-        const c = chip(x, y, item, t);
-        x += c.width + 8;
-        return c.markup;
-      })
-      .join('\n');
-    return `<text x="${PAD}" y="${y + 16}" class="sans sub ink2">${esc(label)}</text>\n${chips}`;
-  }).join('\n');
-
-  return svg({
-    width: W,
-    height: H,
-    t,
-    title: 'Toolbox',
-    desc: TOOLBOX.map(([label, items]) => `${label}: ${items.join(', ')}`).join('. '),
-    body: `${header('Toolbox', 'What I reach for, from UI to packets')}\n${rows}`,
-  });
-}
-
-// ---------- readme table ----------
-
-function statsTable(data, langs) {
-  const cur = currentStreak(data.days);
-  const best = longestStreak(data.history);
-  const allTime = data.history.reduce((a, d) => a + d.count, 0);
-  const active = data.days.filter((d) => d.contributionCount > 0).length;
-  const b = data.breakdown;
-  const wd = weekdayTotals(data.days);
-  const rows = [
-    ['Contributions, last 12 months', fmt(data.yearTotal)],
-    ['Active days, last 12 months', fmt(active)],
-    ['Current streak', `${cur.length} days`],
-    ['Longest streak', `${best.length} days`],
-    [`All-time contributions (since ${data.firstYear})`, fmt(allTime)],
-    ['Commits / PRs / issues / reviews', `${fmt(b.commits)} / ${fmt(b.pullRequests)} / ${fmt(b.issues)} / ${fmt(b.reviews)}`],
-    ['Contributions in private repos', fmt(b.restricted)],
-  ];
-  return [
-    '| Metric | Value |',
-    '| --- | --- |',
-    ...rows.map(([k, v]) => `| ${k} | ${v} |`),
-    '',
-    '| Language | Share |',
-    '| --- | --- |',
-    ...langs.map((l) => `| ${l.name} | ${pct(l.share)} |`),
-    '',
-    `| ${wd.map((d) => d.day).join(' | ')} |`,
-    `| ${wd.map(() => '---').join(' | ')} |`,
-    `| ${wd.map((d) => pct(d.share)).join(' | ')} |`,
-    '',
-    `<sub>Last refreshed ${data.today} · public data only</sub>`,
-  ].join('\n');
-}
-
-async function updateReadme(table) {
-  const start = '<!-- stats:start -->';
-  const end = '<!-- stats:end -->';
-  const readme = await readFile(README, 'utf8');
-  const i = readme.indexOf(start);
-  const j = readme.indexOf(end);
-  if (i < 0 || j < i) return;
-  const next = `${readme.slice(0, i + start.length)}\n${table}\n${readme.slice(j)}`;
-  if (next !== readme) await writeFile(README, next);
 }
 
 // ---------- main ----------
@@ -773,10 +664,8 @@ async function main() {
     await out('overview', overviewCard(data, t));
     await out('activity', activityCard(data, t));
     await out('languages', languagesCard(langs, t));
-    await out('toolbox', toolboxCard(t));
     for (const repo of data.featured) await out(`project-${repo.name}`, projectCard(repo, t, data.today));
   }
-  await updateReadme(statsTable(data, langs));
   console.log(`Rendered cards for ${USER} (${data.yearTotal} contributions in the last year).`);
 }
 
