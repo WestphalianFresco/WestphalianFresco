@@ -20,16 +20,7 @@
   <img src="assets/languages-light.svg" alt="Language share across public repositories" width="100%">
 </picture>
 
-<p>
-  <a href="https://github.com/WestphalianFresco/bid-estimator"><picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/project-bid-estimator-dark.svg">
-    <img src="assets/project-bid-estimator-light.svg" alt="bid-estimator" width="49%">
-  </picture></a>
-  <a href="https://github.com/WestphalianFresco/openclaw-guide"><picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/project-openclaw-guide-dark.svg">
-    <img src="assets/project-openclaw-guide-light.svg" alt="openclaw-guide" width="49%">
-  </picture></a>
-</p>
+<p><a href="https://github.com/WestphalianFresco/bid-estimator"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/project-bid-estimator-dark.svg"><img src="assets/project-bid-estimator-light.svg" alt="bid-estimator" width="49%"></picture></a> <a href="https://github.com/WestphalianFresco/openclaw-guide"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/project-openclaw-guide-dark.svg"><img src="assets/project-openclaw-guide-light.svg" alt="openclaw-guide" width="49%"></picture></a></p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/toolbox-dark.svg">
