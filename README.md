@@ -1,58 +1,68 @@
-# Hello, I'm William
-<a href="https://www.linkedin.com/in/william-f-89b91535b/"><img src="https://img.shields.io/badge/-LinkedIn-0072b1?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<!-- Cards in assets/ are rendered by scripts/build.mjs and refreshed daily by .github/workflows/profile-cards.yml -->
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img src="assets/hero-light.svg" alt="I build for web and mobile, with a security mindset." width="100%">
+</picture>
 
-I am a recent graduate with a profound interest in technology and a dedication to solving complex problems.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/overview-dark.svg">
+  <img src="assets/overview-light.svg" alt="At a glance: contributions, streaks and all-time activity" width="100%">
+</picture>
 
-## Objective
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
+  <img src="assets/activity-light.svg" alt="Weekly contributions over the last 52 weeks and busiest weekday" width="100%">
+</picture>
 
-My journey in computer science has led me to develop a passion for cybersecurity, and I am now eager to do well in this field, specifically aiming to join a Security Operations Center (SOC) as a Tier 1 Analyst.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/languages-dark.svg">
+  <img src="assets/languages-light.svg" alt="Language share across public repositories" width="100%">
+</picture>
 
-## Skills
+<p>
+  <a href="https://github.com/WestphalianFresco/bid-estimator"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/project-bid-estimator-dark.svg">
+    <img src="assets/project-bid-estimator-light.svg" alt="bid-estimator" width="49%">
+  </picture></a>
+  <a href="https://github.com/WestphalianFresco/openclaw-guide"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/project-openclaw-guide-dark.svg">
+    <img src="assets/project-openclaw-guide-light.svg" alt="openclaw-guide" width="49%">
+  </picture></a>
+</p>
 
-| Skill                                         | Associated Project         |
-|-----------------------------------------------|----------------------------|
-| SIEM Implementation and Log Analysis          | <a href="https://google.com">Detection Lab</a>|
-| Network Traffic Monitoring and Attack Detection | <a href="https://google.com">Detection Lab</a>|
-| Security Automation with Shuffle SOAR         | SOC Automation Lab|
-| Incident Response Planning and Execution      | SOC Automation Lab|
-| Case Management with TheHive                  | SOC Automation Lab|
-| Scripting and Automation for Threat Mitigation | SOC Automation Lab|
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/toolbox-dark.svg">
+  <img src="assets/toolbox-light.svg" alt="Toolbox: languages, frameworks, platforms and security tools" width="100%">
+</picture>
 
-## Tools
+<details>
+<summary><b>Numbers behind the cards</b></summary>
 
-### Network
-<div>
-    <img src="https://img.shields.io/badge/-Wireshark-1679A7?&style=for-the-badge&logo=Wireshark&logoColor=white" />
-    <img src="https://img.shields.io/badge/-Suricata-EF3B2D?&style=for-the-badge&logo=Suricata&logoColor=white" />
-    <img src="https://img.shields.io/badge/-Zeek-777BB4?&style=for-the-badge&logo=Zeek&logoColor=white" />
-</div>
+<!-- stats:start -->
+| Metric | Value |
+| --- | --- |
+| Contributions, last 12 months | 132 |
+| Active days, last 12 months | 46 |
+| Current streak | 17 days |
+| Longest streak | 17 days |
+| All-time contributions (since 2020) | 266 |
+| Commits / PRs / issues / reviews | 55 / 5 / 0 / 0 |
+| Contributions in private repos | 63 |
 
-### Endpoint
-<div>
-    <img src="https://img.shields.io/badge/-Microsoft_Defender_for_Endpoint-00A4EF?&style=for-the-badge&logo=Microsoft&logoColor=white" />
-    <img src="https://img.shields.io/badge/-Velociraptor-4B275F?&style=for-the-badge&logo=Velociraptor&logoColor=white" />
-</div>
+| Language | Share |
+| --- | --- |
+| TypeScript | 47% |
+| Python | 18% |
+| HTML | 16% |
+| JavaScript | 12% |
+| CSS | 6.2% |
 
-### SIEM
-<div>
-    <img src="https://img.shields.io/badge/-Microsoft_Sentinel-0078D4?&style=for-the-badge&logo=Microsoft&logoColor=white" />
-    <img src="https://img.shields.io/badge/-Splunk-000000?&style=for-the-badge&logo=Splunk&logoColor=white" />
-    <img src="https://img.shields.io/badge/-Elastic-005571?&style=for-the-badge&logo=Elastic&logoColor=white" />
-</div>
+| Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+| --- | --- | --- | --- | --- | --- | --- |
+| 9.1% | 14% | 18% | 11% | 16% | 14% | 18% |
 
-## Certifications
-<div>
-  <img src="https://img.shields.io/badge/-Security%2B-FF0000?style=for-the-badge&logo=CompTIA&logoColor=white" />
-  <img src="https://img.shields.io/badge/-Network%2B-007ACC?style=for-the-badge&logo=CompTIA&logoColor=white" />
-  <img src="https://img.shields.io/badge/-A%2B-4D4D4D?style=for-the-badge&logo=CompTIA&logoColor=white" />
-  <img src="https://img.shields.io/badge/-CDSA-006400?style=for-the-badge&logoColor=white" />
-  <img src="https://img.shields.io/badge/-CCD-000080?style=for-the-badge&logoColor=white" />
-  <img src="https://img.shields.io/badge/AWS%20Certified-Cloud%20Practitioner-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" />
-</div>
+<sub>Last refreshed 2026-09-30 · public data only</sub>
+<!-- stats:end -->
 
-## Projects
-- Detection Lab
-- SOC Automation Project
-
-I am still working on it...
+</details>

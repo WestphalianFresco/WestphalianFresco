@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="152" viewBox="0 0 840 152" role="img" aria-labelledby="t d">
+<title id="t">Languages</title>
+<desc id="d">TypeScript 47%, Python 18%, HTML 16%, JavaScript 12%, CSS 6.2%</desc>
+<style>
+.sans{font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans&quot;,Helvetica,Arial,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,&quot;SF Mono&quot;,Menlo,Consolas,&quot;Liberation Mono&quot;,monospace}
+.ink{fill:#f0f6fc}.ink2{fill:#9198a1}.muted{fill:#6e7681}
+.h{font-size:14px;font-weight:600}
+.sub{font-size:12px}
+
+</style>
+<rect x="0.5" y="0.5" width="839" height="151" rx="12" fill="#0d1117" stroke="#3d444d"/>
+<text x="24" y="38" class="sans h ink">Languages</text>
+<text x="24" y="57" class="sans sub ink2">Share of code across public repositories · notebooks excluded</text>
+<clipPath id="bar"><rect x="24" y="84" width="792" height="12" rx="6"/></clipPath>
+<g clip-path="url(#bar)"><rect x="24" y="84" width="373.09388831629775" height="12" fill="#3987e5"/><rect x="399.09388831629775" y="84" width="141.01506000086704" height="12" fill="#d95926"/><rect x="542.1089483171647" y="84" width="124.11450858863361" height="12" fill="#199e70"/><rect x="668.2234569057983" y="84" width="96.36189591831882" height="12" fill="#c98500"/><rect x="766.5853528241172" y="84" width="49.41464717588274" height="12" fill="#d55181"/></g>
+<circle cx="29" cy="126" r="5" fill="#3987e5"/>
+<text x="40" y="130" class="mono" font-size="12"><tspan class="ink">TypeScript</tspan><tspan class="ink2" dx="6">47%</tspan></text>
+<circle cx="161" cy="126" r="5" fill="#d95926"/>
+<text x="172" y="130" class="mono" font-size="12"><tspan class="ink">Python</tspan><tspan class="ink2" dx="6">18%</tspan></text>
+<circle cx="293" cy="126" r="5" fill="#199e70"/>
+<text x="304" y="130" class="mono" font-size="12"><tspan class="ink">HTML</tspan><tspan class="ink2" dx="6">16%</tspan></text>
+<circle cx="425" cy="126" r="5" fill="#c98500"/>
+<text x="436" y="130" class="mono" font-size="12"><tspan class="ink">JavaScript</tspan><tspan class="ink2" dx="6">12%</tspan></text>
+<circle cx="557" cy="126" r="5" fill="#d55181"/>
+<text x="568" y="130" class="mono" font-size="12"><tspan class="ink">CSS</tspan><tspan class="ink2" dx="6">6.2%</tspan></text>
+</svg>
