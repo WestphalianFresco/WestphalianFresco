@@ -19,14 +19,15 @@ const FEATURED = [
   { repo: 'openclaw-guide', tags: ['AWS Lightsail', 'self-hosted AI agent'] },
 ];
 
-// Neutrals follow GitHub's Primer scale; data colors come from a CVD-validated palette.
+// Neutrals follow GitHub's Primer scale, the accent uses GitHub's contribution greens,
+// and language colors come from a CVD-validated categorical palette.
 const THEMES = {
   light: {
     surface: '#ffffff', raised: '#f6f8fa', border: '#d1d9e0',
     ink: '#1f2328', ink2: '#59636e', muted: '#818b98',
     grid: '#eff2f5', baseline: '#d1d9e0',
-    accent: '#2a78d6', accentSoft: '#b7d3f6', quiet: '#c8d1da',
-    ramp: ['#eff2f5', '#b7d3f6', '#6da7ec', '#2a78d6', '#184f95'],
+    accent: '#1a7f37', accentSoft: '#6fdd8b', quiet: '#c8d1da',
+    ramp: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
     series: ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948'],
     other: '#8c959f',
   },
@@ -34,8 +35,8 @@ const THEMES = {
     surface: '#0d1117', raised: '#151b23', border: '#3d444d',
     ink: '#f0f6fc', ink2: '#9198a1', muted: '#6e7681',
     grid: '#1b2129', baseline: '#3d444d',
-    accent: '#3987e5', accentSoft: '#1c5cab', quiet: '#3d444d',
-    ramp: ['#1b2129', '#104281', '#1c5cab', '#3987e5', '#86b6ef'],
+    accent: '#3fb950', accentSoft: '#238636', quiet: '#3d444d',
+    ramp: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
     series: ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#008300', '#9085e9', '#e66767'],
     other: '#6e7681',
   },
@@ -334,9 +335,9 @@ function level(count, max) {
 
 // ---------- cards ----------
 
-// Banner-only decoration: scatter light tiles over empty days in this range.
+// Banner-only decoration: scatter tiles over empty days across the whole mosaic.
 // The stat cards below never use it, so every number there stays real.
-const MOSAIC_FILL = { from: '2026-04-01', to: '2026-08-31', density: 0.2 };
+const MOSAIC_FILL_DENSITY = 0.25;
 
 // Stable hash in [0, 1) so the scatter does not reshuffle on every daily refresh.
 function hash01(text) {
@@ -351,8 +352,7 @@ function hash01(text) {
 }
 
 function fillLevel(date) {
-  if (date < MOSAIC_FILL.from || date > MOSAIC_FILL.to) return 0;
-  if (hash01(date) >= MOSAIC_FILL.density) return 0;
+  if (hash01(date) >= MOSAIC_FILL_DENSITY) return 0;
   const shade = hash01(`${date}:shade`);
   return shade < 0.6 ? 1 : shade < 0.9 ? 2 : 3;
 }
