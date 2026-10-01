@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="840" height="152" viewBox="0 0 840 152" role="img" aria-labelledby="t d">
 <title id="t">Stack composition</title>
-<desc id="d">TypeScript 46%, Python 17%, JavaScript 15%, HTML 15%, CSS 6.0%</desc>
+<desc id="d">TypeScript 46%, Python 17%, JavaScript 16%, HTML 15%, CSS 6.0%</desc>
 <style>
 .sans{font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans&quot;,Helvetica,Arial,sans-serif}
 .ink{fill:#f0f6fc}.ink2{fill:#9198a1}.muted{fill:#6e7681}
@@ -12,13 +12,13 @@
 <text x="24" y="38" class="sans h ink">Stack composition</text>
 <text x="24" y="57" class="sans sub ink2">Share of code across public repositories · notebooks excluded</text>
 <clipPath id="bar"><rect x="24" y="84" width="792" height="12" rx="6"/></clipPath>
-<g clip-path="url(#bar)"><rect x="24" y="84" width="359.9042062568982" height="12" fill="#3987e5"/><rect x="385.9042062568982" y="84" width="135.98612396678604" height="12" fill="#d95926"/><rect x="523.8903302236843" y="84" width="120.75276535687203" height="12" fill="#199e70"/><rect x="646.6430955805563" y="84" width="119.6798581633011" height="12" fill="#c98500"/><rect x="768.3229537438574" y="84" width="47.67704625614261" height="12" fill="#d55181"/></g>
+<g clip-path="url(#bar)"><rect x="24" y="84" width="359.6524128632104" height="12" fill="#3987e5"/><rect x="385.6524128632104" y="84" width="135.89012067686915" height="12" fill="#d95926"/><rect x="523.5425335400795" y="84" width="121.21839142452639" height="12" fill="#199e70"/><rect x="646.7609249646059" y="84" width="119.5951998921324" height="12" fill="#c98500"/><rect x="768.3561248567383" y="84" width="47.643875143261646" height="12" fill="#d55181"/></g>
 <circle cx="29" cy="126" r="5" fill="#3987e5"/>
 <text x="40" y="130" class="sans" font-size="12"><tspan class="ink">TypeScript</tspan><tspan class="ink2" dx="6">46%</tspan></text>
 <circle cx="161" cy="126" r="5" fill="#d95926"/>
 <text x="172" y="130" class="sans" font-size="12"><tspan class="ink">Python</tspan><tspan class="ink2" dx="6">17%</tspan></text>
 <circle cx="293" cy="126" r="5" fill="#199e70"/>
-<text x="304" y="130" class="sans" font-size="12"><tspan class="ink">JavaScript</tspan><tspan class="ink2" dx="6">15%</tspan></text>
+<text x="304" y="130" class="sans" font-size="12"><tspan class="ink">JavaScript</tspan><tspan class="ink2" dx="6">16%</tspan></text>
 <circle cx="425" cy="126" r="5" fill="#c98500"/>
 <text x="436" y="130" class="sans" font-size="12"><tspan class="ink">HTML</tspan><tspan class="ink2" dx="6">15%</tspan></text>
 <circle cx="557" cy="126" r="5" fill="#d55181"/>

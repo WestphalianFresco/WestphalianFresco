@@ -29,7 +29,6 @@ const THEMES = {
     ramp: ['#eff2f5', '#b7d3f6', '#6da7ec', '#2a78d6', '#184f95'],
     series: ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948'],
     other: '#8c959f',
-    glow: 0.10,
   },
   dark: {
     surface: '#0d1117', raised: '#151b23', border: '#3d444d',
@@ -39,7 +38,6 @@ const THEMES = {
     ramp: ['#1b2129', '#104281', '#1c5cab', '#3987e5', '#86b6ef'],
     series: ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#008300', '#9085e9', '#e66767'],
     other: '#6e7681',
-    glow: 0.18,
   },
 };
 
@@ -336,6 +334,29 @@ function level(count, max) {
 
 // ---------- cards ----------
 
+// Banner-only decoration: scatter light tiles over empty days in this range.
+// The stat cards below never use it, so every number there stays real.
+const MOSAIC_FILL = { from: '2026-04-01', to: '2026-08-31', density: 0.2 };
+
+// Stable hash in [0, 1) so the scatter does not reshuffle on every daily refresh.
+function hash01(text) {
+  let h = 0x811c9dc5;
+  for (const ch of text) h = Math.imul(h ^ ch.charCodeAt(0), 0x01000193);
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) / 2 ** 32;
+}
+
+function fillLevel(date) {
+  if (date < MOSAIC_FILL.from || date > MOSAIC_FILL.to) return 0;
+  if (hash01(date) >= MOSAIC_FILL.density) return 0;
+  const shade = hash01(`${date}:shade`);
+  return shade < 0.6 ? 1 : shade < 0.9 ? 2 : 3;
+}
+
 function heroCard(data, t) {
   const tile = 14;
   const gap = 4;
@@ -353,7 +374,8 @@ function heroCard(data, t) {
     .flatMap((week, wi) =>
       week.map((d) => {
         const now = d.date === data.today ? ' class="now"' : '';
-        return `<rect${now} x="${gx + wi * (tile + gap)}" y="${gy + d.weekday * (tile + gap)}" width="${tile}" height="${tile}" rx="3" fill="${t.ramp[level(d.contributionCount, max)]}"/>`;
+        const lvl = d.contributionCount > 0 ? level(d.contributionCount, max) : fillLevel(d.date);
+        return `<rect${now} x="${gx + wi * (tile + gap)}" y="${gy + d.weekday * (tile + gap)}" width="${tile}" height="${tile}" rx="3" fill="${t.ramp[lvl]}"/>`;
       }),
     )
     .join('\n');
@@ -370,25 +392,16 @@ function heroCard(data, t) {
 
   const css = `
 .now{animation:pulse 2.4s ease-in-out infinite}
-.glow{animation:drift 16s ease-in-out infinite alternate}
 @keyframes pulse{50%{opacity:.35}}
-@keyframes drift{from{transform:translate(0,0)}to{transform:translate(-60px,24px)}}
-@media (prefers-reduced-motion:reduce){.now,.glow{animation:none}}`;
+@media (prefers-reduced-motion:reduce){.now{animation:none}}`;
 
   const body = `<defs>
-<radialGradient id="g" cx="0.5" cy="0.5" r="0.5">
-<stop offset="0" stop-color="${t.accent}" stop-opacity="${t.glow}"/>
-<stop offset="1" stop-color="${t.accent}" stop-opacity="0"/>
-</radialGradient>
 <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
 <circle cx="1" cy="1" r="1" fill="${t.border}" opacity="0.55"/>
 </pattern>
 <clipPath id="clip"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="11"/></clipPath>
 </defs>
-<g clip-path="url(#clip)">
-<rect width="${W}" height="${H}" fill="url(#dots)" opacity="0.6"/>
-<circle class="glow" cx="${W - 120}" cy="40" r="260" fill="url(#g)"/>
-</g>
+<rect width="${W}" height="${H}" fill="url(#dots)" opacity="0.6" clip-path="url(#clip)"/>
 ${tiles}
 ${months.join('\n')}`;
 
@@ -398,7 +411,7 @@ ${months.join('\n')}`;
     t,
     css,
     title: `${USER} contribution mosaic`,
-    desc: `Mosaic of the last ${recent.length} weeks of contribution activity.`,
+    desc: `Decorative mosaic built from the last ${recent.length} weeks of contribution activity.`,
     body,
   });
 }
