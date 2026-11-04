@@ -17,6 +17,7 @@ const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'JavaScript', 'HTML', 'CSS', 'Da
 const FEATURED = [
   { repo: 'bid-estimator', tags: ['Next.js', 'TypeScript', 'Claude API', 'Zod', 'Vitest', 'Node.js', 'PDF/DOCX parsing'] },
   { repo: 'llm-speedometer', tags: ['Electron', 'JavaScript', 'Node.js', 'Stream Deck SDK', 'esbuild', 'electron-builder'] },
+  { repo: 'TSWhackUMBC', tags: ['Python', 'pandas', 'Streamlit', 'statsmodels', 'PostgreSQL', 'Vercel', 'Jupyter'] },
   { repo: 'long-way-home-technica', tags: ['Godot 4', 'GDScript', '3D rendering', 'GeoJSON', 'Save migration', 'Unit tests'] },
 ];
 
@@ -515,7 +516,6 @@ function activityCard(data, t) {
   }
   ticks.push(`<text x="${left - 8}" y="${bottom + 3.5}" text-anchor="end" class="sans muted" font-size="11">0</text>`);
 
-  const peakIndex = weeks.reduce((best, w, i) => (w.total > weeks[best].total ? i : best), 0);
   const bars = weeks
     .map((w, i) => {
       if (!w.total) return '';
@@ -523,13 +523,6 @@ function activityCard(data, t) {
       return `<path d="${columnPath(x, y(w.total), bw, bottom - y(w.total), 3)}" fill="${t.accent}"/>`;
     })
     .join('');
-
-  let peakLabel = '';
-  if (max > 0) {
-    const px = left + peakIndex * slot + slot / 2;
-    const anchor = px > right - 60 ? 'end' : px < left + 60 ? 'start' : 'middle';
-    peakLabel = `<text x="${px}" y="${y(max) - 8}" text-anchor="${anchor}" class="sans ink2" font-size="11">peak ${fmt(max)} · wk of ${shortDate(weeks[peakIndex].start)}</text>`;
-  }
 
   const monthLabels = [];
   let lastX = -Infinity;
@@ -566,7 +559,6 @@ ${w ? `<path d="${barPath(barX, ry, w, 10, 4)}" fill="${fill}"/>` : ''}
 ${ticks.join('\n')}
 <line x1="${left}" x2="${right}" y1="${bottom + 0.5}" y2="${bottom + 0.5}" stroke="${t.baseline}"/>
 ${bars}
-${peakLabel}
 ${monthLabels.join('\n')}
 <line x1="${wx - 24.5}" x2="${wx - 24.5}" y1="${top - 4}" y2="${bottom + 18}" stroke="${t.grid}"/>
 <text x="${wx}" y="${top - 8}" class="sans sub ink2">By weekday</text>
