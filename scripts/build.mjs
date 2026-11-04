@@ -15,8 +15,9 @@ const TOP_LANGUAGES = 5;
 const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'JavaScript', 'HTML', 'CSS', 'Dart', 'C++', 'Shell'];
 
 const FEATURED = [
-  { repo: 'bid-estimator', tags: ['Next.js', 'Claude API', 'Vitest'] },
-  { repo: 'openclaw-guide', tags: ['AWS Lightsail', 'self-hosted AI agent'] },
+  { repo: 'bid-estimator', tags: ['Next.js', 'TypeScript', 'Claude API', 'Zod', 'Vitest', 'Node.js', 'PDF/DOCX parsing'] },
+  { repo: 'llm-speedometer', tags: ['Electron', 'JavaScript', 'Node.js', 'Stream Deck SDK', 'esbuild', 'electron-builder'] },
+  { repo: 'long-way-home-technica', tags: ['Godot 4', 'GDScript', '3D rendering', 'GeoJSON', 'Save migration', 'Unit tests'] },
 ];
 
 // Neutrals follow GitHub's Primer scale, the accent uses GitHub's contribution greens,
@@ -628,20 +629,29 @@ ${legend}`;
 
 function projectCard(repo, t, today) {
   const CW = 410;
-  const H = 176;
+  // Tags wrap onto a second row; every card reserves both rows so side-by-side cards match.
+  const ROW = 29;
+  const H = 176 + ROW;
   const lines = wrap(repo.description ?? 'No description yet.', 12, CW - 40, 2);
   const desc = lines
     .map((line, i) => `<text x="20" y="${70 + i * 18}" class="sans ink2" font-size="12">${esc(line)}</text>`)
     .join('\n');
 
   let cx = 20;
+  let cy = 106;
   const tags = repo.tags
     .map((label) => {
-      const c = chip(cx, 106, label, t, 11);
+      let c = chip(cx, cy, label, t, 11);
+      if (cx > 20 && cx + c.width > CW - 20) {
+        cx = 20;
+        cy += ROW;
+        c = chip(cx, cy, label, t, 11);
+      }
       cx += c.width + 6;
       return c.markup;
     })
     .join('\n');
+  if (cy > 106 + ROW) throw new Error(`Too many tags for ${repo.name}: they need a third row.`);
 
   const lang = repo.primaryLanguage?.name;
   const slot = lang ? LANGUAGE_SLOTS.indexOf(lang) : -1;
@@ -649,18 +659,18 @@ function projectCard(repo, t, today) {
   let fx = 20;
   const footer = [];
   if (lang) {
-    footer.push(`<circle cx="${fx + 5}" cy="152" r="5" fill="${langColor}"/><text x="${fx + 16}" y="156" class="sans ink2" font-size="12">${esc(lang)}</text>`);
+    footer.push(`<circle cx="${fx + 5}" cy="${152 + ROW}" r="5" fill="${langColor}"/><text x="${fx + 16}" y="${156 + ROW}" class="sans ink2" font-size="12">${esc(lang)}</text>`);
     fx += 16 + lang.length * 12 * SANS_ADVANCE + 18;
   }
-  footer.push(`<path transform="translate(${fx},144)" fill="${t.muted}" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="${fx + 21}" y="156" class="sans ink2" font-size="12">${fmt(repo.stargazerCount)}</text>`);
-  footer.push(`<text x="${CW - 20}" y="156" text-anchor="end" class="sans muted" font-size="12">${relativeTime(repo.pushedAt, today)}</text>`);
+  footer.push(`<path transform="translate(${fx},${144 + ROW})" fill="${t.muted}" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="${fx + 21}" y="${156 + ROW}" class="sans ink2" font-size="12">${fmt(repo.stargazerCount)}</text>`);
+  footer.push(`<text x="${CW - 20}" y="${156 + ROW}" text-anchor="end" class="sans muted" font-size="12">${relativeTime(repo.pushedAt, today)}</text>`);
 
   const body = `<path transform="translate(20,24)" fill="${t.muted}" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/>
 <text x="44" y="37" class="sans ink" font-size="14" font-weight="600">${esc(repo.name)}</text>
 <text x="${CW - 20}" y="37" text-anchor="end" class="sans muted" font-size="14">↗</text>
 ${desc}
 ${tags}
-<line x1="20" x2="${CW - 20}" y1="134.5" y2="134.5" stroke="${t.grid}"/>
+<line x1="20" x2="${CW - 20}" y1="${134.5 + ROW}" y2="${134.5 + ROW}" stroke="${t.grid}"/>
 ${footer.join('\n')}`;
 
   return svg({
