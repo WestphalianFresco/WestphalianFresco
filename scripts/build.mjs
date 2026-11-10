@@ -688,7 +688,7 @@ const TERMINAL = {
   title: 'westphalian@fresco',
   groups: [
     [
-      ['OS', 'Windows 11, macOS'],
+      ['OS', 'macOS'],
       ['Uptime', (s) => s.uptime],
       ['Host', 'Information Science undergrad'],
       ['Kernel', 'Cybersecurity -> Software Engineering'],
