@@ -2,7 +2,7 @@
 // Renders the profile README cards as light and dark SVGs.
 // Only public data is queried, so the output never reveals private repositories.
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 const USER = process.env.PROFILE_USER ?? 'WestphalianFresco';
 const TOKEN = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN;
@@ -74,7 +74,9 @@ async function graphql(query, variables = {}) {
 const PROFILE_QUERY = `
 query($login: String!) {
   user(login: $login) {
+    id
     createdAt
+    followers { totalCount }
     contributionsCollection {
       contributionYears
       totalCommitContributions
@@ -149,6 +151,9 @@ async function collect() {
   }
 
   return {
+    userId: user.id,
+    createdAt: user.createdAt,
+    followers: user.followers.totalCount,
     today,
     firstYear: Math.min(...cc.contributionYears),
     days,
@@ -675,6 +680,224 @@ ${footer.join('\n')}`;
   });
 }
 
+// ---------- terminal card ----------
+
+// neofetch-style card: ASCII portrait on the left, system info on the right.
+// Static lines live here; Uptime and the GitHub Stats block are computed on every run.
+const TERMINAL = {
+  title: 'westphalian@fresco',
+  groups: [
+    [
+      ['OS', 'Windows 11, macOS'],
+      ['Uptime', (s) => s.uptime],
+      ['Host', 'Information Science undergrad'],
+      ['Kernel', 'Cybersecurity -> Software Engineering'],
+      ['IDE', 'VS Code, Claude Code'],
+    ],
+    [
+      ['Languages.Programming', 'Python, TypeScript, JavaScript, Dart'],
+      ['Languages.Computer', 'HTML, CSS, JSON, YAML, SQL'],
+    ],
+    [
+      ['Hobbies.Software', 'CTFs, automation scripts'],
+      ['Hobbies.Hardware', 'Stream Deck plugins, homelab VMs'],
+    ],
+  ],
+  contact: [['GitHub', 'WestphalianFresco']],
+};
+
+const TERM = {
+  font: 16,
+  line: 20,
+  artCols: 40,
+  infoCols: 64,
+  statsSplit: 38, // width of the left half of the two-column stats rows
+  // Menlo and DejaVu Sans Mono advance 0.602em, the widest of the usual fallbacks;
+  // sizing for them keeps the right column inside the card on every platform.
+  advance: 0.602,
+};
+const MONO = 'ConsolasFallback,Consolas,Menlo,&quot;DejaVu Sans Mono&quot;,&quot;Liberation Mono&quot;,monospace';
+
+const TERM_THEMES = {
+  dark: { bg: '#161b22', border: '#30363d', text: '#c9d1d9', key: '#ffa657', value: '#a5d6ff', cc: '#616e7f', add: '#3fb950', del: '#f85149' },
+  light: { bg: '#f6f8fa', border: '#d1d9e0', text: '#24292f', key: '#953800', value: '#0a3069', cc: '#c2cfde', add: '#1a7f37', del: '#cf222e' },
+};
+
+const AFFILIATED_QUERY = `
+query($login: String!, $after: String) {
+  user(login: $login) {
+    repositories(first: 100, after: $after, privacy: PUBLIC,
+                 ownerAffiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]) {
+      pageInfo { hasNextPage endCursor }
+      nodes { name owner { login } stargazerCount }
+    }
+  }
+}`;
+
+const HISTORY_QUERY = `
+query($owner: String!, $name: String!, $author: ID!, $after: String) {
+  repository(owner: $owner, name: $name) {
+    defaultBranchRef {
+      target {
+        ... on Commit {
+          history(first: 100, after: $after, author: {id: $author}) {
+            totalCount
+            pageInfo { hasNextPage endCursor }
+            nodes { additions deletions }
+          }
+        }
+      }
+    }
+  }
+}`;
+
+// Commits and lines of code count only the user's own commits on default branches
+// of public repositories they own or collaborate on.
+async function collectTerminal(data) {
+  const repos = [];
+  let after = null;
+  do {
+    const { user } = await graphql(AFFILIATED_QUERY, { login: USER, after });
+    repos.push(...user.repositories.nodes);
+    after = user.repositories.pageInfo.hasNextPage ? user.repositories.pageInfo.endCursor : null;
+  } while (after);
+
+  let commits = 0;
+  let additions = 0;
+  let deletions = 0;
+  for (const repo of repos) {
+    let cursor = null;
+    do {
+      const { repository } = await graphql(HISTORY_QUERY, { owner: repo.owner.login, name: repo.name, author: data.userId, after: cursor });
+      const history = repository?.defaultBranchRef?.target?.history;
+      if (!history) break; // empty repository
+      if (!cursor) commits += history.totalCount;
+      for (const c of history.nodes) {
+        additions += c.additions;
+        deletions += c.deletions;
+      }
+      cursor = history.pageInfo.hasNextPage ? history.pageInfo.endCursor : null;
+    } while (cursor);
+  }
+
+  const owned = repos.filter((r) => r.owner.login.toLowerCase() === USER.toLowerCase());
+  return {
+    uptime: uptime(data.createdAt, data.today),
+    repos: owned.length,
+    contributed: repos.length,
+    stars: owned.reduce((a, r) => a + r.stargazerCount, 0),
+    commits,
+    followers: data.followers,
+    additions,
+    deletions,
+  };
+}
+
+function uptime(createdAt, today) {
+  const [y0, m0, d0] = createdAt.slice(0, 10).split('-').map(Number);
+  const [y1, m1, d1] = today.split('-').map(Number);
+  let years = y1 - y0;
+  let months = m1 - m0;
+  let days = d1 - d0;
+  if (days < 0) {
+    months -= 1;
+    days += new Date(Date.UTC(y1, m1 - 1, 0)).getUTCDate(); // length of the previous month
+  }
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+  const part = (n, unit) => `${n} ${unit}${n === 1 ? '' : 's'}`;
+  return `${part(years, 'year')}, ${part(months, 'month')}, ${part(days, 'day')}`;
+}
+
+// A row is a list of [class, text] segments laid out in one monospace line.
+const segLength = (segs) => segs.reduce((a, [, text]) => a + [...text].length, 0);
+
+// Joins two halves with a dot leader so the row is exactly `width` characters.
+function leader(left, right, width) {
+  const dots = Math.max(1, width - segLength(left) - segLength(right) - 2);
+  return [...left, ['cc', ` ${'.'.repeat(dots)} `], ...right];
+}
+
+const keyValue = (key, value, width) => leader([['cc', '. '], ['key', `${key}:`]], [['value', value]], width);
+
+function rule(label, width, prefix) {
+  const head = prefix ? [['cc', '- '], ['text', label]] : [['text', label]];
+  const dashes = Math.max(3, width - segLength(head) - 5);
+  return [...head, ['cc', ` -${'—'.repeat(dashes)}-—-`]];
+}
+
+function terminalRows(s) {
+  const width = TERM.infoCols;
+  const split = TERM.statsSplit;
+  const rows = [rule(TERMINAL.title, width, false)];
+  TERMINAL.groups.forEach((group, i) => {
+    if (i) rows.push([['cc', '. ']]);
+    for (const [key, value] of group) rows.push(keyValue(key, typeof value === 'function' ? value(s) : value, width));
+  });
+
+  rows.push([], rule('Contact', width, true));
+  for (const [key, value] of TERMINAL.contact) rows.push(keyValue(key, value, width));
+
+  const pair = (lk, lv, rk, rv) => [
+    ...leader([['cc', '. '], ['key', `${lk}:`]], lv, split),
+    ['cc', ' | '],
+    ...leader([['key', `${rk}:`]], [['value', fmt(rv)]], width - split - 3),
+  ];
+  rows.push([], rule('GitHub Stats', width, true));
+  rows.push(pair('Repos', [['value', fmt(s.repos)], ['text', ' {'], ['key', 'Contributed: '], ['value', fmt(s.contributed)], ['text', '}']], 'Stars', s.stars));
+  rows.push(pair('Commits', [['value', fmt(s.commits)]], 'Followers', s.followers));
+  rows.push(
+    leader(
+      [['cc', '. '], ['key', 'Lines of Code on GitHub:']],
+      [['value', fmt(s.additions - s.deletions)], ['text', ' ( '], ['add', `${fmt(s.additions)}++`], ['text', ', '], ['del', `${fmt(s.deletions)}--`], ['text', ' )']],
+      width,
+    ),
+  );
+  return rows;
+}
+
+function terminalCard(stats, art, tt) {
+  const cw = TERM.font * TERM.advance;
+  const pad = 20;
+  const infoX = Math.round(pad + TERM.artCols * cw + 24);
+  const rows = terminalRows(stats);
+  const count = Math.max(rows.length, art.length);
+  const width = Math.ceil(infoX + TERM.infoCols * cw + pad);
+  const height = pad * 2 + count * TERM.line;
+  const baseline = (i) => pad + TERM.font + i * TERM.line;
+
+  const artText = art
+    .map((line, i) => `<text x="${pad}" y="${baseline(i)}" class="art">${esc(line)}</text>`)
+    .join('\n');
+  const infoText = rows
+    .map((segs, i) => (segs.length ? `<text x="${infoX}" y="${baseline(i)}">${segs.map(([cls, text]) => `<tspan class="${cls}">${esc(text)}</tspan>`).join('')}</text>` : ''))
+    .join('\n');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="t d">
+<title id="t">${esc(TERMINAL.title)}</title>
+<desc id="d">${esc(`${stats.repos} public repos, ${stats.commits} commits, ${fmt(stats.additions - stats.deletions)} lines of code; GitHub member for ${stats.uptime}.`)}</desc>
+<style>
+text{font-family:${MONO};font-size:${TERM.font}px;white-space:pre;fill:${tt.text}}
+.art{fill:${tt.text}}.key{fill:${tt.key}}.value{fill:${tt.value}}.cc{fill:${tt.cc}}.add{fill:${tt.add}}.del{fill:${tt.del}}
+</style>
+<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="12" fill="${tt.bg}" stroke="${tt.border}"/>
+${artText}
+${infoText}
+</svg>
+`;
+}
+
+async function readArt(mode) {
+  try {
+    const text = await readFile(new URL(`portrait-${mode}.txt`, ASSETS), 'utf8');
+    return text.replace(/\s+$/, '').split(/\r?\n/);
+  } catch {
+    return []; // no portrait yet; the card still renders
+  }
+}
+
 // ---------- main ----------
 
 async function main() {
@@ -682,6 +905,11 @@ async function main() {
   const data = await collect();
   const langs = languageShares(data.repos);
   await mkdir(ASSETS, { recursive: true });
+
+  const stats = await collectTerminal(data);
+  for (const [mode, tt] of Object.entries(TERM_THEMES)) {
+    await writeFile(new URL(`terminal-${mode}.svg`, ASSETS), terminalCard(stats, await readArt(mode), tt));
+  }
 
   for (const [mode, t] of Object.entries(THEMES)) {
     const out = (name, content) => writeFile(new URL(`${name}-${mode}.svg`, ASSETS), content);
