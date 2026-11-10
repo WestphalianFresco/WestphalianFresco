@@ -698,7 +698,7 @@ const TERMINAL = {
       ['IDE', 'Cursor, VS Code, Claude Code'],
     ],
     [
-      ['Languages.Programming', 'Python, TypeScript, JavaScript, Dart'],
+      ['Languages.Programming', 'Python, Java, TypeScript, JavaScript, Dart'],
       ['Languages.Computer', 'HTML, CSS, JSON, YAML, SQL'],
     ],
     [
@@ -713,7 +713,7 @@ const TERM = {
   font: 16,
   line: 20,
   artCols: 40,
-  infoCols: 64,
+  infoCols: 70,
   statsSplit: 38, // width of the left half of the two-column stats rows
   // Menlo and DejaVu Sans Mono advance 0.602em, the widest of the usual fallbacks;
   // sizing for them keeps the right column inside the card on every platform.
