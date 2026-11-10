@@ -379,12 +379,17 @@ function heroCard(data, t) {
   const gy = 40;
   const H = gy + gridH + 48;
   // Tiles stay static because stalled animations can leave them invisible; only today pulses.
+  // The daily refresh runs just after midnight UTC, when today is still empty, so today's tile
+  // is lit at least to the middle shade; otherwise it pulses in the empty color and cannot be seen.
+  const TODAY_MIN_LEVEL = 2;
   const tiles = recent
     .flatMap((week, wi) =>
       week.map((d) => {
-        const now = d.date === data.today ? ' class="now"' : '';
+        const isToday = d.date === data.today;
+        const now = isToday ? ' class="now"' : '';
         const decorative = d.date < MOSAIC_REAL_FROM ? fillLevel(d.date) : 0;
-        const lvl = d.contributionCount > 0 ? level(d.contributionCount, max) : decorative;
+        const real = d.contributionCount > 0 ? level(d.contributionCount, max) : decorative;
+        const lvl = isToday ? Math.max(real, TODAY_MIN_LEVEL) : real;
         return `<rect${now} x="${gx + wi * (tile + gap)}" y="${gy + d.weekday * (tile + gap)}" width="${tile}" height="${tile}" rx="3" fill="${t.ramp[lvl]}"/>`;
       }),
     )
