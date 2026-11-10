@@ -694,7 +694,7 @@ const TERMINAL = {
       ['OS', 'macOS'],
       ['Uptime', (s) => s.uptime],
       ['Host', 'InfoSci + Math undergrad'],
-      ['Kernel', 'Cybersecurity -> Software Engineering'],
+      ['Kernel', 'Cybersecurity -> SWE / SDE / FDE'],
       ['IDE', 'VS Code, Claude Code'],
     ],
     [
