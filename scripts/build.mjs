@@ -342,9 +342,11 @@ function level(count, max) {
 
 // ---------- cards ----------
 
-// Banner-only decoration: scatter tiles over empty days across the whole mosaic.
-// The stat cards below never use it, so every number there stays real.
+// Banner-only decoration: scatter tiles over empty days before MOSAIC_REAL_FROM.
+// From that date on the mosaic shows real contributions only, so it tracks live activity.
+// The stat cards below never use the scatter, so every number there stays real.
 const MOSAIC_FILL_DENSITY = 0.25;
+const MOSAIC_REAL_FROM = '2026-09-01';
 
 // Stable hash in [0, 1) so the scatter does not reshuffle on every daily refresh.
 function hash01(text) {
@@ -381,7 +383,8 @@ function heroCard(data, t) {
     .flatMap((week, wi) =>
       week.map((d) => {
         const now = d.date === data.today ? ' class="now"' : '';
-        const lvl = d.contributionCount > 0 ? level(d.contributionCount, max) : fillLevel(d.date);
+        const decorative = d.date < MOSAIC_REAL_FROM ? fillLevel(d.date) : 0;
+        const lvl = d.contributionCount > 0 ? level(d.contributionCount, max) : decorative;
         return `<rect${now} x="${gx + wi * (tile + gap)}" y="${gy + d.weekday * (tile + gap)}" width="${tile}" height="${tile}" rx="3" fill="${t.ramp[lvl]}"/>`;
       }),
     )
@@ -690,7 +693,7 @@ const TERMINAL = {
     [
       ['OS', 'macOS'],
       ['Uptime', (s) => s.uptime],
-      ['Host', 'Information Science undergrad'],
+      ['Host', 'InfoSci + Math undergrad'],
       ['Kernel', 'Cybersecurity -> Software Engineering'],
       ['IDE', 'VS Code, Claude Code'],
     ],
