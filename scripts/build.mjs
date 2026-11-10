@@ -703,7 +703,7 @@ const TERMINAL = {
     ],
     [
       ['Hobbies.Software', 'CTFs, automation scripts'],
-      ['Hobbies.Hardware', 'Stream Deck plugins, homelab VMs'],
+      ['Hobbies.Hardware', 'Homelab VMs'],
     ],
   ],
   contact: [['GitHub', 'WestphalianFresco']],
