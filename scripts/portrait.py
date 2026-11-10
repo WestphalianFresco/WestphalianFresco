@@ -128,9 +128,9 @@ def tone(crop, mask, gamma):
     return np.clip((gray - lo) / max(hi - lo, 1.0), 0, 1) ** gamma
 
 
-def edges(crop, mask):
+def edges(crop, mask, sigma=1.0):
     """Gradient magnitude scaled to [0, 1], so glasses, eyes and jaw stay visible."""
-    gray = cv2.GaussianBlur(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255, (0, 0), 1)
+    gray = cv2.GaussianBlur(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255, (0, 0), sigma)
     mag = np.hypot(cv2.Sobel(gray, cv2.CV_32F, 1, 0), cv2.Sobel(gray, cv2.CV_32F, 0, 1))
     return np.clip(mag / max(np.percentile(mag[mask > 0.5], 97), 1e-6), 0, 1)
 
@@ -174,7 +174,8 @@ def main():
     parser.add_argument("--raise-by", type=float, default=0.45, help="headroom above the face, in face heights")
     parser.add_argument("--floor", type=float, default=0.1, help="minimum ink inside the subject")
     parser.add_argument("--gamma", type=float, default=0.8, help="below 1 brightens midtones")
-    parser.add_argument("--edge", type=float, default=0.5, help="weight of the edge map")
+    parser.add_argument("--edge", type=float, default=0.0, help="weight of the edge map (0.5 sharpens features)")
+    parser.add_argument("--blur", type=float, default=1.0, help="soften facial detail, in character cells")
     parser.add_argument("--density", type=float, default=1.4, help="ink multiplier before glyph matching")
     parser.add_argument("--tone-weight", type=float, default=4.0, help="how much overall darkness counts")
     parser.add_argument("--face", help="face box in photo pixels as x,y,w,h (skips detection)")
@@ -192,7 +193,11 @@ def main():
     crop, inside, face_in_crop = crop_portrait(bgr, face, args.cols, args.rows, args.zoom, args.raise_by)
     mask = inside.astype(np.float32) if args.no_mask else subject_mask(crop, inside, face_in_crop)
     level = tone(crop, mask, args.gamma)
-    outline = args.edge * edges(crop, mask)
+    # Blur is given in character cells so it means the same at any photo resolution.
+    sigma = args.blur * crop.shape[1] / args.cols
+    if sigma > 0:
+        level = cv2.GaussianBlur(level, (0, 0), sigma)
+    outline = args.edge * edges(crop, mask, max(1.0, sigma))
 
     font = load_font(args.font)
     bank = glyph_bank(font)
