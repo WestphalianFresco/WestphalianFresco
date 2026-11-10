@@ -695,7 +695,7 @@ const TERMINAL = {
       ['Uptime', (s) => s.uptime],
       ['Host', 'InfoSci + Math'],
       ['Kernel', 'Cybersecurity -> SWE / SDE / FDE'],
-      ['IDE', 'VS Code, Claude Code'],
+      ['IDE', 'Cursor, VS Code, Claude Code'],
     ],
     [
       ['Languages.Programming', 'Python, TypeScript, JavaScript, Dart'],
