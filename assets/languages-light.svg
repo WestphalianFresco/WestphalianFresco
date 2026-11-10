@@ -12,7 +12,7 @@
 <text x="24" y="38" class="sans h ink">Stack composition</text>
 <text x="24" y="57" class="sans sub ink2">Share of code across public repositories · notebooks excluded</text>
 <clipPath id="bar"><rect x="24" y="84" width="792" height="12" rx="6"/></clipPath>
-<g clip-path="url(#bar)"><rect x="24" y="84" width="314.5358482544118" height="12" fill="#eda100"/><rect x="340.5358482544118" y="84" width="170.64343481145832" height="12" fill="#1baf7a"/><rect x="513.1792830658701" y="84" width="149.29307574586474" height="12" fill="#2a78d6"/><rect x="664.4723588117348" y="84" width="62.22271044731761" height="12" fill="#eb6834"/><rect x="728.6950692590524" y="84" width="49.84877038480232" height="12" fill="#8c959f"/><rect x="780.5438396438547" y="84" width="35.45616035614518" height="12" fill="#8c959f"/></g>
+<g clip-path="url(#bar)"><rect x="24" y="84" width="314.5348683137849" height="12" fill="#eda100"/><rect x="340.5348683137849" y="84" width="170.64535223302093" height="12" fill="#1baf7a"/><rect x="513.1802205468058" y="84" width="149.29260736848406" height="12" fill="#2a78d6"/><rect x="664.4728279152898" y="84" width="62.222511624835136" height="12" fill="#eb6834"/><rect x="728.6953395401249" y="84" width="49.84860986991329" height="12" fill="#8c959f"/><rect x="780.5439494100382" y="84" width="35.45605058996168" height="12" fill="#8c959f"/></g>
 <circle cx="29" cy="126" r="5" fill="#eda100"/>
 <text x="40" y="130" class="sans" font-size="12"><tspan class="ink">HTML</tspan><tspan class="ink2" dx="6">40%</tspan></text>
 <circle cx="161" cy="126" r="5" fill="#1baf7a"/>
