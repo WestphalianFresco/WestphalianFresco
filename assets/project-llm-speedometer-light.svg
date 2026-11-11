@@ -28,5 +28,5 @@
 <line x1="20" x2="390" y1="163.5" y2="163.5" stroke="#eff2f5"/>
 <circle cx="25" cy="181" r="5" fill="#1baf7a"/><text x="36" y="185" class="sans ink2" font-size="12">JavaScript</text>
 <path transform="translate(121.2,173)" fill="#818b98" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/><text x="142.2" y="185" class="sans ink2" font-size="12">0</text>
-<text x="390" y="185" text-anchor="end" class="sans muted" font-size="12">updated 4 days ago</text>
+<text x="390" y="185" text-anchor="end" class="sans muted" font-size="12">updated 5 days ago</text>
 </svg>
