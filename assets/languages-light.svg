@@ -11,7 +11,7 @@
 <rect x="0.5" y="0.5" width="839" height="132" rx="12" fill="#ffffff" stroke="#d1d9e0"/>
 <text x="24" y="38" class="sans h ink">Stack composition</text>
 <clipPath id="bar"><rect x="24" y="65" width="792" height="12" rx="6"/></clipPath>
-<g clip-path="url(#bar)"><rect x="24" y="65" width="314.4359255541606" height="12" fill="#eda100"/><rect x="340.4359255541606" y="65" width="170.69801072678675" height="12" fill="#1baf7a"/><rect x="513.1339362809473" y="65" width="149.24531618643027" height="12" fill="#2a78d6"/><rect x="664.3792524673776" y="65" width="62.34337684363423" height="12" fill="#eb6834"/><rect x="728.7226293110118" y="65" width="49.83240298385824" height="12" fill="#4a3aa7"/><rect x="780.5550322948701" y="65" width="35.44496770512994" height="12" fill="#8c959f"/></g>
+<g clip-path="url(#bar)"><rect x="24" y="65" width="314.4094859866107" height="12" fill="#eda100"/><rect x="340.4094859866107" y="65" width="170.74975604221038" height="12" fill="#1baf7a"/><rect x="513.1592420288212" y="65" width="149.23267899693633" height="12" fill="#2a78d6"/><rect x="664.3919210257575" y="65" width="62.33800068081244" height="12" fill="#eb6834"/><rect x="728.7299217065699" y="65" width="49.82807216611823" height="12" fill="#4a3aa7"/><rect x="780.5579938726881" y="65" width="35.44200612731193" height="12" fill="#8c959f"/></g>
 <circle cx="29" cy="107" r="5" fill="#eda100"/>
 <text x="40" y="111" class="sans" font-size="12"><tspan class="ink">HTML</tspan><tspan class="ink2" dx="6">40%</tspan></text>
 <circle cx="161" cy="107" r="5" fill="#1baf7a"/>
