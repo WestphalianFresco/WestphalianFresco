@@ -1,72 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1124" height="460" viewBox="0 0 1124 460" role="img" aria-labelledby="t d">
-<title id="t">westphalian@fresco</title>
-<desc id="d">21 public repos, 285 commits, 210,779 lines of code; GitHub member for 6 years, 2 months, 21 days.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1221" height="560" viewBox="0 0 1221 560" role="img" aria-labelledby="t d">
+<title id="t">westphalianfresco</title>
+<desc id="d">21 public repos, 286 commits, 210,798 lines of code; GitHub member for 6 years, 2 months, 21 days.</desc>
 <style>
 text{font-family:ConsolasFallback,Consolas,Menlo,&quot;DejaVu Sans Mono&quot;,&quot;Liberation Mono&quot;,monospace;font-size:16px;white-space:pre;fill:#c9d1d9}
 .art{fill:#c9d1d9;font-size:8px}.key{fill:#ffa657}.value{fill:#a5d6ff}.cc{fill:#616e7f}.add{fill:#3fb950}.del{fill:#f85149}
 </style>
-<rect x="0.5" y="0.5" width="1123" height="459" rx="12" fill="#161b22" stroke="#30363d"/>
-<text x="20" y="28" class="art">                 _={}(||||=======|=============|=========|}{}e_                 </text>
-<text x="20" y="38" class="art">              _={(====|=============================||======||{}_               </text>
-<text x="20" y="48" class="art">            -{}(=====|==========|=======================||======l}_`            </text>
-<text x="20" y="58" class="art">           ={/===========|=======================||===|||=|=======l}}_          </text>
-<text x="20" y="68" class="art">         `/\========||||========================||====|=============l{}\`       </text>
-<text x="20" y="78" class="art">        -(==========||=||==||=======|=========|||||||||||=============|l}-      </text>
-<text x="20" y="88" class="art">       `{========|=||||==|||||||||||||=||||||||||}}||||}}|||===========||}-     </text>
-<text x="20" y="98" class="art">       |(=======|=||||||||=|||||||||||||||}}|}{{jj}}{{{jj}|}|||==|||||=|{@}     </text>
-<text x="20" y="108" class="art">       {(======|==|{}|||||||}||||||}}}{}}}}{}}{@@@@jjj@@@@j{j}||||||||=={@}     </text>
-<text x="20" y="118" class="art">      -(=====|||||||||||||(||||(l|||||{}{}}{jj@@@@@@@@@@@@@}{}}}|||||||=|}-     </text>
-<text x="20" y="128" class="art">      |(===|jjjj}}}|||==|||||=====||}||}{j}}j@@@gg@@@@@@@@@@@j}}||||====={-     </text>
-<text x="20" y="138" class="art">     -j===|@@@@@@@@jjj}|jjj}||||{jjj@@@@@@@@@@@@gggggggggg@@@@@}}|||===-={`     </text>
-<text x="20" y="148" class="art">     |}==={@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggggg@@@@@Qggggggggg@@@j}}}|===-={`     </text>
-<text x="20" y="158" class="art">     |(==|@@@@@@@@@@@@@@@@@@gggggggggg888Q@@@@@@@@@@@@@@@gggg@@@j}|||==-=|`     </text>
-<text x="20" y="168" class="art">     ||=={@@@@@@@@@@@@@@@@@gggggg@@@@@S}}}}{jjj@@@@@@@@@@@@g@@@@@@}||===-==     </text>
-<text x="20" y="178" class="art">    `|}=|j@@{{}}}}l{}{{@@@@@@@@@@@@@j}jj@@@@@@@gggg@@@@@@@@@@@@@@@@}|===--=`    </text>
-<text x="20" y="188" class="art">     -V}|@@}}}|jjjjj}||{{{@@@@@@@@@@@@@@@@@@@Q88N88gg@@@@@@@@@@BS}(======|j;    </text>
-<text x="20" y="198" class="art">  `` `{({@jj@@@@@@@@@@@@jj{j@@@@@@@@@@@S{}{}}jjjjjj}}&quot;&quot;{{{{}jy@@@@@||||j@@@@@   </text>
-<text x="20" y="208" class="art"> ``-=|(={{}{{7FZZ@@@@@@}}lll{V@BF{yyj}}(!==!||{jj@@j}=|j@@@@@@@@@@@}|{@@@@@{@y  </text>
-<text x="20" y="218" class="art">`-==={|-=|jj{{}}ll}}77{{jj|=--===@g@@j}||{j@@@@SZ@@@@{@gg@@@@@@@@@@j}@@@gg@@@@/ </text>
-<text x="20" y="228" class="art">`-====@j{@@}||jjy@@@@@@@j@}=|@@@j{@@@@jjjjjjjj@@@@@@@@@@@@@@@@@@@@@@@@@@8gg@@@j </text>
-<text x="20" y="238" class="art">`-=|==Zj|@@@@@@@@@@@@@@@@@}=j@@gg@{@@@@@@@@@@@@@@ggg@@gg@@@@@@@@@@@@@@@j@@@@@@( </text>
-<text x="20" y="248" class="art"> `=|{j@@j{@@@@@@@@@@@@@@@}\|@@@ggg@@@@@@@@@@@@@@@@@@@gggg@@@@@@@@@@@@@@@@@@@@@- </text>
-<text x="20" y="258" class="art">  `=lX@@@}@@@@@@@@@@@@@U}l|@@@@@gggg@j}}{l&quot;ll{{}j@@@ggggg@@@@@@@@@@@@@@g@@@@@F  </text>
-<text x="20" y="268" class="art">     `'l@jj{}}{{{{{}}}|||{{@@@@@ggggg@j/=|{j@@@@@@@gggg@@@@@@@@@@@@@@@@@@@@@}   </text>
-<text x="20" y="278" class="art">       `l@@@@jy@@@@@@@}}|{j@@@@@gggggg@@/==l}{Z@@@@@@@@@@@@@@@@@@@@@@@@@@@@&quot;    </text>
-<text x="20" y="288" class="art">        -{@@@@@@@@@@@}|}@@@@@@@@@@@Q88@@jj}|==|l{Z@@@@@@@@@@@@@@@@@@@@@@@F`     </text>
-<text x="20" y="298" class="art">        `{Z@@@jVSV}}}}jj}(&quot;lll}{{}}{{Z@@@@@@}||||{{jj@@@@@@@@@@@@@@@@@@@}`      </text>
-<text x="20" y="308" class="art">        -{{{{{}}}}|{jj@@j}||====|j@@@@@ggg@@@@}||{j@@@@@@@@@@@@@@@@@}{7`        </text>
-<text x="20" y="318" class="art">         ^{}}}}}}{jj@@@@@@@j@@@@@@@@@@gggg@@@@}}{{@@@@@@@@@@@@@@@@@}==          </text>
-<text x="20" y="328" class="art">          `{}}{jj@@j{V@@@@V{{VS@US@@@@BBBSZ}ll\|{j@@@@@@@@@@@@@@@@@}|`          </text>
-<text x="20" y="338" class="art">           !jjjj@@@@}(!^^==||==|=||jy@@@@|=|j@j|{V@@@@@@@@@@@@@@@@{@=           </text>
-<text x="20" y="348" class="art">           `jj@@@@@@@jj|===l||{@@@@@@@@@@@@@g@@jjj@@@@@@@@@@@@@@@@@@\           </text>
-<text x="20" y="358" class="art">            !@@@@@@@@@@@jj}{j@@@@@@@@@@@ggggg@@@@@@@@@@@@@@@@@@@j@@@@`          </text>
-<text x="20" y="368" class="art">             ^@@@j{j@@@@@@@jj{{{Z@@@@@@@@ggggg@@@@@@@@@@@@@@@V{j@@@@@`          </text>
-<text x="20" y="378" class="art">              ^@j}{{@@@@@@@Sjjjj@@@@@@@@@@@ggggg@@@@@@@@@@@V}{j@@@@@}--`-`      </text>
-<text x="20" y="388" class="art">               ^{}}{{j@@@@@jj@@@@@@@@ggggggggggggg@@@@@@@h}}j@@@@@@@j======`    </text>
-<text x="20" y="398" class="art">                 &quot;{}{{j@@@@@@@@@@@@ggggggggggggQ@@@@@@@@}}{@@@@ggg@@@}-=|jj=-`  </text>
-<text x="20" y="408" class="art">                  `l{}{{j@@@@@@@@@@@@Qgggggg@@@@@@@@h{}}|{{@@gggggg@@}=|y@@@j=` </text>
-<text x="20" y="418" class="art">                    `&quot;j}{j@@V{{@@@@@@@@@@@@@@S}}{{}}}}}{jj@@@ggggg@@}||{{{j@@@=`</text>
-<text x="20" y="428" class="art">                      `?j}}}|lllllll!!l!!!ll|||||}}}jjj@@@@@gggg8BSj}l{{{j}}j@@_</text>
-<text x="20" y="438" class="art">                       `l%@}|=======-----=====|l|}{{{{@@@@@@gg@@}}=={V{V{}{FVh@@</text>
-<text x="429" y="36"><tspan class="text">westphalian@fresco</tspan><tspan class="cc"> -———————————————————————————————————————————————-—-</tspan></text>
-<text x="429" y="56"><tspan class="cc">. </tspan><tspan class="key">OS:</tspan><tspan class="cc"> .......................................................... </tspan><tspan class="value">macOS</tspan></text>
-<text x="429" y="76"><tspan class="cc">. </tspan><tspan class="key">Uptime:</tspan><tspan class="cc"> ................................. </tspan><tspan class="value">6 years, 2 months, 21 days</tspan></text>
-<text x="429" y="96"><tspan class="cc">. </tspan><tspan class="key">Major:</tspan><tspan class="cc"> .............................................. </tspan><tspan class="value">InfoSci + Math</tspan></text>
-<text x="429" y="116"><tspan class="cc">. </tspan><tspan class="key">Kernel:</tspan><tspan class="cc"> ........................... </tspan><tspan class="value">Cybersecurity -&gt; SWE / SDE / FDE</tspan></text>
-<text x="429" y="136"><tspan class="cc">. </tspan><tspan class="key">Focus:</tspan><tspan class="cc"> ................ </tspan><tspan class="value">AI agents, MCP, LLM automation, code quality</tspan></text>
-<text x="429" y="156"><tspan class="cc">. </tspan><tspan class="key">IDE:</tspan><tspan class="cc"> .................................. </tspan><tspan class="value">Cursor, VS Code, Claude Code</tspan></text>
-<text x="429" y="176"><tspan class="cc">. </tspan></text>
-<text x="429" y="196"><tspan class="cc">. </tspan><tspan class="key">Languages.Programming:</tspan><tspan class="cc"> .. </tspan><tspan class="value">Python, Java, TypeScript, JavaScript, Dart</tspan></text>
-<text x="429" y="216"><tspan class="cc">. </tspan><tspan class="key">Languages.Computer:</tspan><tspan class="cc"> ..................... </tspan><tspan class="value">HTML, CSS, JSON, YAML, SQL</tspan></text>
-<text x="429" y="236"><tspan class="cc">. </tspan></text>
-<text x="429" y="256"><tspan class="cc">. </tspan><tspan class="key">Hobbies.Software:</tspan><tspan class="cc"> ......................... </tspan><tspan class="value">CTFs, automation scripts</tspan></text>
-<text x="429" y="276"><tspan class="cc">. </tspan><tspan class="key">Hobbies.Hardware:</tspan><tspan class="cc"> ........ </tspan><tspan class="value">Homelab VMs, Jetson Nano embedded systems</tspan></text>
+<rect x="0.5" y="0.5" width="1220" height="559" rx="12" fill="#161b22" stroke="#30363d"/>
+<text x="20" y="28" class="art">                                                                                                    </text>
+<text x="20" y="38" class="art">                                                                                                    </text>
+<text x="20" y="48" class="art">                                                                                                    </text>
+<text x="20" y="58" class="art">                                   `________|{}}|\=___,,`                                           </text>
+<text x="20" y="68" class="art">                                 _i{}(|||llll=====!!ll(!ll\=,,`                                     </text>
+<text x="20" y="78" class="art">                              -/{l===========================|{}\=__`                               </text>
+<text x="20" y="88" class="art">                           -=/l====================================!l}}\=                           </text>
+<text x="20" y="98" class="art">                        -=(!============================================|};                         </text>
+<text x="20" y="108" class="art">                      ={(l================================================!}\`                      </text>
+<text x="20" y="118" class="art">                     /(=======================================-============-=}}_`                   </text>
+<text x="20" y="128" class="art">                   -(=========================================================|{}e,                 </text>
+<text x="20" y="138" class="art">                  =(==========|/=|====|==================||=|===||==============||}=                </text>
+<text x="20" y="148" class="art">                 =(====|==||||||=||||||==|||=|||=|||||||||}}}}||{}}}|||==========||{\               </text>
+<text x="20" y="158" class="art">                -}\======|/=|}||||||||||||||||}}}}}}{j{jjj@@@jy@@@@j}}}|||||||||||{{@=              </text>
+<text x="20" y="168" class="art">                !(======||||{}}|||||||}}|}||{{}{{jjj@@@@@@@@@@@@@@@@@@@j}}}}}}}}|=|{@(              </text>
+<text x="20" y="178" class="art">                |=====||}|||}}|||||}|||||}|||}}}{j@@j@@@@@@@@@@@@@@@@@@@@jj}}}}}|=={}`              </text>
+<text x="20" y="188" class="art">               `(===||{jj}}}}|||||}}|||||==||{}}{{j@j@@@@@g@@@@@@@@@@@@@@j}}{}}||==|}               </text>
+<text x="20" y="198" class="art">               |/=-={@@@@@@jjj}|||}}|||==|||}{j@@@@@@@@@@@ggg@@@@@gg@@@@@@j}{}||==-=(               </text>
+<text x="20" y="208" class="art">              -}=-`=j@@@@@@@@@@@@@@@@@jjj@@@@@@@@@ggg@@@@@@8g@gggggggg@@@@@@j}(|=--=(               </text>
+<text x="20" y="218" class="art">              =(=--|@@@@@@@@@@@@@@@@@@@@@@@@@gggggg88Q@@@@@@@@@@@@ggggg@@@@j}}||=``=(               </text>
+<text x="20" y="228" class="art">              =(=-=j@@@@@@@@@@@@@@@@@gggggggg@@@BF}&quot;&quot;&quot;&quot;&quot;&quot;l{Z@@@@@@@@ggggg@@@j}}|=-``!`              </text>
+<text x="20" y="238" class="art">             `=|=-|@@@VVVF7777FS@@@@@gggg@@@@@}=====|jyyy@@@@@@@@@@@@@@@@@@@@j}|=--`-=              </text>
+<text x="20" y="248" class="art">             `=j|=|j}(==-----```=l{{@@@@@@@}}|||j@@@@@@@@ggggg@@@@@@@@@@@@@@@}l==--`-=              </text>
+<text x="20" y="258" class="art">           `   !}={}||jj@@@@@@y||||=|{@@@@@jjj@@@@@SBSFFFZZBBBBBBBBBBF}{{}jyj======|@@y-            </text>
+<text x="20" y="268" class="art">           ```={&quot;={}{@@@@@@@@BB@@V}(|{{@@@@B{||||l======l!l|||=-`--_j@@@@@@@@j==={@@@l{@`           </text>
+<text x="20" y="278" class="art">          `--=|=-=!!=||||||ll|e@y}|==-'^^'=@@@}|=====|jjj}}}(||={@@gggggg@@@@}=={@@@@j=Z@           </text>
+<text x="20" y="288" class="art">         `-====j;=j@}(!==_____||||{j|--_;==@@@@j}||l}{{}|||j@@@}@gg@@@@@@@@@@@||@@@gg@|{@=          </text>
+<text x="20" y="298" class="art">          -===={@\{@j|j@@@@@@@@@@hjj(={@@@@|@@@@@@@@@@@@@@@@gg@}@@@@@@@@@@@@@@}j@S7B@@@@@(          </text>
+<text x="20" y="308" class="art">          -=|||j@|{@@@@@@jjjjjjy@@j}=|@@@gg@j@@@@@@@@@@@@@@@gQB@ggg@@@@@@@@@@@@@@j=={@@@@-          </text>
+<text x="20" y="318" class="art">           -l{@@@@}Z@@@@@@@@@@@@@@j(|j@@@gggg@ZS@@@@{V@@@BSF{j@gggg@@@@@@@@@@@@@@@@j|@@@@           </text>
+<text x="20" y="328" class="art">            `'&quot;V@@j{Z@@@@@@@@@@S}&quot;=|j@@@@ggggg@@======||jy@@@ggggggggg@@@@@@@@@@@@@@@@@@`           </text>
+<text x="20" y="338" class="art">                `{@@@j|=|||||||;===|j@@@@gggggg@@|==l{V@@@@@@@ggggggggg@@@@@@@@@@@@@@@B`            </text>
+<text x="20" y="348" class="art">                 -{@@@@@@@@@@@@}(\|j@@@@@gggggggg@(====={{@@@@@@@@@@@@gg@@@@@@@@@@@@@&quot;              </text>
+<text x="20" y="358" class="art">                 `|@@@@@@@@@@}}||{VhVSU@@@@@@@@@@@@yj|===!|{{@@@@@@@@gggg@@@@@@@@@@C`               </text>
+<text x="20" y="368" class="art">                 `|@@@@@@S}}l||{j}|======&quot;&quot;&quot;||jy@@@@@@y||||{{j@@@@@@@@ggg@@@@@@@@@F`                </text>
+<text x="20" y="378" class="art">                 `|j@@Z}}|||||{j@@j}}|||||j@@@@ggggg@@@@j||{j@@@@@@@@@@@g@@@@@}=]`                  </text>
+<text x="20" y="388" class="art">                  `&quot;@@j}{jjj}{{@@@@@@@@@@@@@@@@@@@@@@@@h}l|{@@@@@@@@@@@@@@@@@h}=-                   </text>
+<text x="20" y="398" class="art">                    &quot;@@@@@@@j}l{{{{}}ll}}}}}}l&quot;&quot;?{}&quot;&quot;&quot;''==|{@@@@@@@@@ggg@@@@@}|=                    </text>
+<text x="20" y="408" class="art">                     {@@@@@@@}==--`-===|||_|yy@@yj@};|@@j=={Z@@@@@@@@@@@@@@@}jj                     </text>
+<text x="20" y="418" class="art">                     [@@@@@@@@jjj|====|{@@@@@@@@@@@@@@g@@j|{j@@@@@@@@@@@@@@@@@}=                    </text>
+<text x="20" y="428" class="art">                      {@@@@@@@@@@@@jjj@@@@@@@@@@@@ggggg@@@@@@@@@@@@@@@@@@@j@@@j}                    </text>
+<text x="20" y="438" class="art">                       7@@@jj@@@@@@@@@j{{}{{Z@@@@@@@@@@gg@@@@@@@@@@@@@@@jj@@@@@=                    </text>
+<text x="20" y="448" class="art">                        {@}}{@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@@@@@S{j@@@@@@j=-````               </text>
+<text x="20" y="458" class="art">                         l@}{{@@@@@@@@@@@@@@@@ggggggggggggggg@@@@@@@}}j@@@@@@@@|=''=-`              </text>
+<text x="20" y="468" class="art">                          `{jj@@@@@@@@@@@@gggggggggggggggg@@@@@@@@h{j@@@gggg@@@j=`-=||=`            </text>
+<text x="20" y="478" class="art">                            '{@@@@@@@@@@@@@@@@@gggggggg@@@@@@@@Vj}}{j@@gggggg@@}-`===}{=-           </text>
+<text x="20" y="488" class="art">                              `{@@@@@@@@@@@@@@@@@@@@@@@@S{V@@jjjj@@@@@gggggg@@{|======|}|-          </text>
+<text x="20" y="498" class="art">                                `7{{{{}{{}{{}}ll}llll}}}|{jj@@@@@@@@@ggggg8B}|/&quot;====/|!|{},         </text>
+<text x="20" y="508" class="art">                                 `lh@j}}}||||=======||}}{}{V@@@@@@@@@ggg8B}|=_=l(=\==ll{}{@@@@@g@@y_</text>
+<text x="20" y="518" class="art">                                 -|}}l{jjj}||||=========|}{j@@@@@@@ggg@B}=&quot;&quot;/}(={i|=}(=}{{@ggggggggg</text>
+<text x="20" y="528" class="art">                               _|@C&quot;-=@@@@j}}}|||=====|{j@@@@@@@ggg@@@V(|V({{|||j|||}}||@@gggggggggg</text>
+<text x="20" y="538" class="art">                            -/|VFl=---{@@@@@jj}}||||jj@@@@@@@@ggg@@h}||yyjyjj{}|{j}}||j@gggggggggggg</text>
+<text x="526" y="36"><tspan class="text">westphalianfresco</tspan><tspan class="cc"> -————————————————————————————————————————————————-—-</tspan></text>
+<text x="526" y="56"><tspan class="cc">. </tspan><tspan class="key">OS:</tspan><tspan class="cc"> .......................................................... </tspan><tspan class="value">macOS</tspan></text>
+<text x="526" y="76"><tspan class="cc">. </tspan><tspan class="key">Uptime:</tspan><tspan class="cc"> ................................. </tspan><tspan class="value">6 years, 2 months, 21 days</tspan></text>
+<text x="526" y="96"><tspan class="cc">. </tspan><tspan class="key">Major:</tspan><tspan class="cc"> .............................................. </tspan><tspan class="value">InfoSci + Math</tspan></text>
+<text x="526" y="116"><tspan class="cc">. </tspan><tspan class="key">Kernel:</tspan><tspan class="cc"> ........................... </tspan><tspan class="value">Cybersecurity -&gt; SWE / SDE / FDE</tspan></text>
+<text x="526" y="136"><tspan class="cc">. </tspan><tspan class="key">Focus:</tspan><tspan class="cc"> ................ </tspan><tspan class="value">AI agents, MCP, LLM automation, code quality</tspan></text>
+<text x="526" y="156"><tspan class="cc">. </tspan><tspan class="key">IDE:</tspan><tspan class="cc"> .................................. </tspan><tspan class="value">Cursor, VS Code, Claude Code</tspan></text>
+<text x="526" y="176"><tspan class="cc">. </tspan></text>
+<text x="526" y="196"><tspan class="cc">. </tspan><tspan class="key">Languages.Programming:</tspan><tspan class="cc"> .. </tspan><tspan class="value">Python, Java, TypeScript, JavaScript, Dart</tspan></text>
+<text x="526" y="216"><tspan class="cc">. </tspan><tspan class="key">Languages.Computer:</tspan><tspan class="cc"> ..................... </tspan><tspan class="value">HTML, CSS, JSON, YAML, SQL</tspan></text>
+<text x="526" y="236"><tspan class="cc">. </tspan></text>
+<text x="526" y="256"><tspan class="cc">. </tspan><tspan class="key">Hobbies.Software:</tspan><tspan class="cc"> ......................... </tspan><tspan class="value">CTFs, automation scripts</tspan></text>
+<text x="526" y="276"><tspan class="cc">. </tspan><tspan class="key">Hobbies.Hardware:</tspan><tspan class="cc"> ........ </tspan><tspan class="value">Homelab VMs, Jetson Nano embedded systems</tspan></text>
 
-<text x="429" y="316"><tspan class="cc">- </tspan><tspan class="text">Contact</tspan><tspan class="cc"> -————————————————————————————————————————————————————————-—-</tspan></text>
-<text x="429" y="336"><tspan class="cc">. </tspan><tspan class="key">GitHub:</tspan><tspan class="cc"> .......................................... </tspan><tspan class="value">WestphalianFresco</tspan></text>
+<text x="526" y="316"><tspan class="cc">- </tspan><tspan class="text">Contact</tspan><tspan class="cc"> -————————————————————————————————————————————————————————-—-</tspan></text>
+<text x="526" y="336"><tspan class="cc">. </tspan><tspan class="key">GitHub:</tspan><tspan class="cc"> .......................................... </tspan><tspan class="value">WestphalianFresco</tspan></text>
 
-<text x="429" y="376"><tspan class="cc">- </tspan><tspan class="text">GitHub Stats</tspan><tspan class="cc"> -———————————————————————————————————————————————————-—-</tspan></text>
-<text x="429" y="396"><tspan class="cc">. </tspan><tspan class="key">Repos:</tspan><tspan class="cc"> ........ </tspan><tspan class="value">21</tspan><tspan class="text"> {</tspan><tspan class="key">Contributed: </tspan><tspan class="value">23</tspan><tspan class="text">}</tspan><tspan class="cc"> | </tspan><tspan class="key">Stars:</tspan><tspan class="cc"> .................... </tspan><tspan class="value">3</tspan></text>
-<text x="429" y="416"><tspan class="cc">. </tspan><tspan class="key">Commits:</tspan><tspan class="cc"> ....................... </tspan><tspan class="value">285</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers:</tspan><tspan class="cc"> ................ </tspan><tspan class="value">1</tspan></text>
-<text x="429" y="436"><tspan class="cc">. </tspan><tspan class="key">Lines of Code on GitHub:</tspan><tspan class="cc"> ........... </tspan><tspan class="value">210,779</tspan><tspan class="text"> ( </tspan><tspan class="add">264,389++</tspan><tspan class="text">, </tspan><tspan class="del">53,610--</tspan><tspan class="text"> )</tspan></text>
+<text x="526" y="376"><tspan class="cc">- </tspan><tspan class="text">GitHub Stats</tspan><tspan class="cc"> -———————————————————————————————————————————————————-—-</tspan></text>
+<text x="526" y="396"><tspan class="cc">. </tspan><tspan class="key">Repos:</tspan><tspan class="cc"> ........ </tspan><tspan class="value">21</tspan><tspan class="text"> {</tspan><tspan class="key">Contributed: </tspan><tspan class="value">23</tspan><tspan class="text">}</tspan><tspan class="cc"> | </tspan><tspan class="key">Stars:</tspan><tspan class="cc"> .................... </tspan><tspan class="value">3</tspan></text>
+<text x="526" y="416"><tspan class="cc">. </tspan><tspan class="key">Commits:</tspan><tspan class="cc"> ....................... </tspan><tspan class="value">286</tspan><tspan class="cc"> | </tspan><tspan class="key">Followers:</tspan><tspan class="cc"> ................ </tspan><tspan class="value">1</tspan></text>
+<text x="526" y="436"><tspan class="cc">. </tspan><tspan class="key">Lines of Code on GitHub:</tspan><tspan class="cc"> ........... </tspan><tspan class="value">210,798</tspan><tspan class="text"> ( </tspan><tspan class="add">264,505++</tspan><tspan class="text">, </tspan><tspan class="del">53,707--</tspan><tspan class="text"> )</tspan></text>
 </svg>

@@ -10,9 +10,8 @@
 </style>
 <rect x="0.5" y="0.5" width="839" height="151" rx="12" fill="#ffffff" stroke="#d1d9e0"/>
 <text x="24" y="38" class="sans h ink">Stack composition</text>
-<text x="24" y="57" class="sans sub ink2">Share of code across public repositories · notebooks excluded</text>
 <clipPath id="bar"><rect x="24" y="84" width="792" height="12" rx="6"/></clipPath>
-<g clip-path="url(#bar)"><rect x="24" y="84" width="314.4202571289162" height="12" fill="#eda100"/><rect x="340.4202571289162" y="84" width="170.71764612434328" height="12" fill="#1baf7a"/><rect x="513.1379032532595" y="84" width="149.23782722661613" height="12" fill="#2a78d6"/><rect x="664.3757304798756" y="84" width="62.351220397834936" height="12" fill="#eb6834"/><rect x="728.7269508777106" y="84" width="49.82983648598046" height="12" fill="#8c959f"/><rect x="780.556787363691" y="84" width="35.443212636308964" height="12" fill="#8c959f"/></g>
+<g clip-path="url(#bar)"><rect x="24" y="84" width="314.4202571289162" height="12" fill="#eda100"/><rect x="340.4202571289162" y="84" width="170.71764612434328" height="12" fill="#1baf7a"/><rect x="513.1379032532595" y="84" width="149.23782722661613" height="12" fill="#2a78d6"/><rect x="664.3757304798756" y="84" width="62.351220397834936" height="12" fill="#eb6834"/><rect x="728.7269508777106" y="84" width="49.82983648598046" height="12" fill="#4a3aa7"/><rect x="780.556787363691" y="84" width="35.443212636308964" height="12" fill="#8c959f"/></g>
 <circle cx="29" cy="126" r="5" fill="#eda100"/>
 <text x="40" y="130" class="sans" font-size="12"><tspan class="ink">HTML</tspan><tspan class="ink2" dx="6">40%</tspan></text>
 <circle cx="161" cy="126" r="5" fill="#1baf7a"/>
@@ -21,7 +20,7 @@
 <text x="304" y="130" class="sans" font-size="12"><tspan class="ink">TypeScript</tspan><tspan class="ink2" dx="6">19%</tspan></text>
 <circle cx="425" cy="126" r="5" fill="#eb6834"/>
 <text x="436" y="130" class="sans" font-size="12"><tspan class="ink">Python</tspan><tspan class="ink2" dx="6">8.1%</tspan></text>
-<circle cx="557" cy="126" r="5" fill="#8c959f"/>
+<circle cx="557" cy="126" r="5" fill="#4a3aa7"/>
 <text x="568" y="130" class="sans" font-size="12"><tspan class="ink">GDScript</tspan><tspan class="ink2" dx="6">6.5%</tspan></text>
 <circle cx="689" cy="126" r="5" fill="#8c959f"/>
 <text x="700" y="130" class="sans" font-size="12"><tspan class="ink">Other</tspan><tspan class="ink2" dx="6">4.5%</tspan></text>
