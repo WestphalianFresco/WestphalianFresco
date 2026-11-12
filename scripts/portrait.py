@@ -2,7 +2,7 @@
 """Turn a headshot into the ASCII portrait shown on the terminal card.
 
 Usage:
-    python scripts/portrait.py PHOTO [--cols 40] [--rows 21] [--zoom 2.7]
+    python scripts/portrait.py PHOTO [--cols 80] [--rows 42] [--zoom 2.7]
                                      [--face x,y,w,h] [--no-mask] [--preview preview.png]
 
 Writes assets/portrait-dark.txt (bright areas drawn dense, for dark backgrounds)
@@ -29,7 +29,7 @@ FONT_CANDIDATES = [
     "/System/Library/Fonts/Menlo.ttc",
     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
 ]
-# The card draws 16px text on a 20px line, so a cell is about 2.2x taller than wide.
+# The card draws the portrait in 8px text on a 10px line, so a cell is about 2.2x taller than wide.
 CELL_W, CELL_H = 11, 24
 BLUR_SIGMA = 1.6
 CHARSET = [chr(c) for c in range(32, 127)]
@@ -168,8 +168,8 @@ def render_preview(dark, light, font_path, out):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("photo")
-    parser.add_argument("--cols", type=int, default=40)
-    parser.add_argument("--rows", type=int, default=21, help="matches the info column on the card")
+    parser.add_argument("--cols", type=int, default=80)
+    parser.add_argument("--rows", type=int, default=42, help="matches the info column on the card")
     parser.add_argument("--zoom", type=float, default=2.7, help="crop height in face heights")
     parser.add_argument("--raise-by", type=float, default=0.45, help="headroom above the face, in face heights")
     parser.add_argument("--floor", type=float, default=0.1, help="minimum ink inside the subject")

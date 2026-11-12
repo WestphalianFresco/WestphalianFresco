@@ -698,8 +698,9 @@ const TERMINAL = {
     [
       ['OS', 'macOS'],
       ['Uptime', (s) => s.uptime],
-      ['Host', 'InfoSci + Math'],
+      ['Major', 'InfoSci + Math'],
       ['Kernel', 'Cybersecurity -> SWE / SDE / FDE'],
+      ['Focus', 'AI agents, MCP, LLM automation, code quality'],
       ['IDE', 'Cursor, VS Code, Claude Code'],
     ],
     [
@@ -708,7 +709,7 @@ const TERMINAL = {
     ],
     [
       ['Hobbies.Software', 'CTFs, automation scripts'],
-      ['Hobbies.Hardware', 'Homelab VMs'],
+      ['Hobbies.Hardware', 'Homelab VMs, Jetson Nano embedded systems'],
     ],
   ],
   contact: [['GitHub', 'WestphalianFresco']],
@@ -717,7 +718,10 @@ const TERMINAL = {
 const TERM = {
   font: 16,
   line: 20,
-  artCols: 40,
+  // The portrait uses half-size text: 4x the characters in the same box, so more facial detail.
+  artFont: 8,
+  artLine: 10,
+  artCols: 80,
   infoCols: 70,
   statsSplit: 38, // width of the left half of the two-column stats rows
   // Menlo and DejaVu Sans Mono advance 0.602em, the widest of the usual fallbacks;
@@ -869,15 +873,14 @@ function terminalRows(s) {
 function terminalCard(stats, art, tt) {
   const cw = TERM.font * TERM.advance;
   const pad = 20;
-  const infoX = Math.round(pad + TERM.artCols * cw + 24);
+  const infoX = Math.round(pad + TERM.artCols * TERM.artFont * TERM.advance + 24);
   const rows = terminalRows(stats);
-  const count = Math.max(rows.length, art.length);
   const width = Math.ceil(infoX + TERM.infoCols * cw + pad);
-  const height = pad * 2 + count * TERM.line;
+  const height = pad * 2 + Math.max(rows.length * TERM.line, art.length * TERM.artLine);
   const baseline = (i) => pad + TERM.font + i * TERM.line;
 
   const artText = art
-    .map((line, i) => `<text x="${pad}" y="${baseline(i)}" class="art">${esc(line)}</text>`)
+    .map((line, i) => `<text x="${pad}" y="${pad + TERM.artFont + i * TERM.artLine}" class="art">${esc(line)}</text>`)
     .join('\n');
   const infoText = rows
     .map((segs, i) => (segs.length ? `<text x="${infoX}" y="${baseline(i)}">${segs.map(([cls, text]) => `<tspan class="${cls}">${esc(text)}</tspan>`).join('')}</text>` : ''))
@@ -888,7 +891,7 @@ function terminalCard(stats, art, tt) {
 <desc id="d">${esc(`${stats.repos} public repos, ${stats.commits} commits, ${fmt(stats.additions - stats.deletions)} lines of code; GitHub member for ${stats.uptime}.`)}</desc>
 <style>
 text{font-family:${MONO};font-size:${TERM.font}px;white-space:pre;fill:${tt.text}}
-.art{fill:${tt.text}}.key{fill:${tt.key}}.value{fill:${tt.value}}.cc{fill:${tt.cc}}.add{fill:${tt.add}}.del{fill:${tt.del}}
+.art{fill:${tt.text};font-size:${TERM.artFont}px}.key{fill:${tt.key}}.value{fill:${tt.value}}.cc{fill:${tt.cc}}.add{fill:${tt.add}}.del{fill:${tt.del}}
 </style>
 <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="12" fill="${tt.bg}" stroke="${tt.border}"/>
 ${artText}
