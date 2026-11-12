@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/terminal-dark.svg">
-  <img src="assets/terminal-light.svg" alt="westphalian@fresco: ASCII portrait with system info and live GitHub stats" width="100%">
+  <img src="assets/terminal-light.svg" alt="westphalianfresco: ASCII portrait with system info and live GitHub stats" width="100%">
 </picture>
 
 <picture>

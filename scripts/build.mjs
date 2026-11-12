@@ -12,7 +12,7 @@ const ASSETS = new URL('../assets/', import.meta.url);
 const EXCLUDED_LANGUAGES = new Set(['Jupyter Notebook']);
 const TOP_LANGUAGES = 5;
 // Fixed language-to-slot map so a language keeps its color when ranks shift.
-const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'JavaScript', 'HTML', 'CSS', 'Dart', 'C++', 'Shell'];
+const LANGUAGE_SLOTS = ['TypeScript', 'Python', 'JavaScript', 'HTML', 'CSS', 'Dart', 'GDScript', 'Jupyter Notebook'];
 
 const FEATURED = [
   { repo: 'bid-estimator', tags: ['Next.js', 'TypeScript', 'Claude API', 'Zod', 'Vitest', 'Node.js', 'PDF/DOCX parsing'] },
@@ -319,9 +319,8 @@ ${body}
 `;
 }
 
-function header(title, subtitle) {
-  return `<text x="${PAD}" y="${PAD + 14}" class="sans h ink">${esc(title)}</text>
-<text x="${PAD}" y="${PAD + 33}" class="sans sub ink2">${esc(subtitle)}</text>`;
+function header(title) {
+  return `<text x="${PAD}" y="${PAD + 14}" class="sans h ink">${esc(title)}</text>`;
 }
 
 function chip(x, y, label, t, size = 12) {
@@ -486,7 +485,7 @@ function overviewCard(data, t) {
     .map(([n, s], i) => `${i ? '<tspan class="muted">   ·   </tspan>' : ''}<tspan class="ink" font-weight="600">${fmt(n)}</tspan><tspan> ${esc(s)}</tspan>`)
     .join('')}</text>`;
 
-  const body = `${header('At a glance', `Public activity over the last 12 months · refreshed ${shortDate(data.today, true)}`)}
+  const body = `${header('At a glance')}
 ${dividers}
 ${label(tileX(0), 'Contributions')}${value(tileX(0), data.yearTotal)}${sparkBaseline}${spark}${note(tileX(0), 'last 12 months, by month')}
 ${label(tileX(1), 'Current streak')}${value(tileX(1), cur.length, cur.length === 1 ? 'day' : 'days')}${note(tileX(1), cur.start ? `since ${shortDate(cur.start)}` : 'start one today')}
@@ -568,7 +567,7 @@ ${w ? `<path d="${barPath(barX, ry, w, 10, 4)}" fill="${fill}"/>` : ''}
     })
     .join('\n');
 
-  const body = `${header('Contribution activity', `Weekly contributions over the last 52 weeks · busiest: ${wd.filter((d) => d.share === peakDay.share).map((d) => d.day).join(' & ')}`)}
+  const body = `${header('Contribution activity')}
 ${ticks.join('\n')}
 <line x1="${left}" x2="${right}" y1="${bottom + 0.5}" y2="${bottom + 0.5}" stroke="${t.baseline}"/>
 ${bars}
@@ -617,7 +616,7 @@ function languagesCard(langs, t) {
     })
     .join('\n');
 
-  const body = `${header('Stack composition', 'Share of code across public repositories · notebooks excluded')}
+  const body = `${header('Stack composition')}
 <clipPath id="bar"><rect x="${x0}" y="${by}" width="${width}" height="${bh}" rx="6"/></clipPath>
 <g clip-path="url(#bar)">${segments}</g>
 ${legend}`;
@@ -693,7 +692,7 @@ ${footer.join('\n')}`;
 // neofetch-style card: ASCII portrait on the left, system info on the right.
 // Static lines live here; Uptime and the GitHub Stats block are computed on every run.
 const TERMINAL = {
-  title: 'westphalian@fresco',
+  title: 'westphalianfresco',
   groups: [
     [
       ['OS', 'macOS'],
@@ -721,7 +720,7 @@ const TERM = {
   // The portrait uses half-size text: 4x the characters in the same box, so more facial detail.
   artFont: 8,
   artLine: 10,
-  artCols: 80,
+  artCols: 100,
   infoCols: 70,
   statsSplit: 38, // width of the left half of the two-column stats rows
   // Menlo and DejaVu Sans Mono advance 0.602em, the widest of the usual fallbacks;
