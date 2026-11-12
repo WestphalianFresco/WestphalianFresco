@@ -431,7 +431,7 @@ ${months.join('\n')}`;
 }
 
 function overviewCard(data, t) {
-  const H = 214;
+  const H = 195;
   const cur = currentStreak(data.days);
   const best = longestStreak(data.history);
   const allTime = data.history.reduce((a, d) => a + d.count, 0);
@@ -439,7 +439,7 @@ function overviewCard(data, t) {
   const months = monthlyTotals(data.days);
 
   // The first tile is wider so its sparkline never runs into the next tile.
-  const top = 88;
+  const top = 69;
   const firstW = 264;
   const restW = (W - PAD * 2 - firstW) / 3;
   const tileX = (i) => PAD + (i ? firstW + (i - 1) * restW : 0);
@@ -504,7 +504,7 @@ ${breakdown}`;
 }
 
 function activityCard(data, t) {
-  const H = 268;
+  const H = 249;
   const weeks = data.weeks.slice(-52).map((w) => ({
     start: w[0].date,
     total: w.reduce((a, d) => a + d.contributionCount, 0),
@@ -515,8 +515,8 @@ function activityCard(data, t) {
 
   const left = PAD + 28;
   const right = 556;
-  const top = 92;
-  const bottom = 222;
+  const top = 73;
+  const bottom = 203;
   const slot = (right - left) / weeks.length;
   const bw = Math.min(24, Math.max(4, slot - 3));
   const y = (v) => bottom - (v / yMax) * (bottom - top);
@@ -587,14 +587,14 @@ ${rhythm}`;
 }
 
 function languagesCard(langs, t) {
-  const H = 152;
+  const H = 133;
   const colorOf = (name) => {
     const slot = LANGUAGE_SLOTS.indexOf(name);
     return slot >= 0 ? t.series[slot] : t.other;
   };
   const x0 = PAD;
   const width = W - PAD * 2;
-  const by = 84;
+  const by = 65;
   const bh = 12;
   const gap = 2;
   let x = x0;
@@ -874,9 +874,11 @@ function terminalCard(stats, art, tt) {
   const pad = 20;
   const infoX = Math.round(pad + TERM.artCols * TERM.artFont * TERM.advance + 24);
   const rows = terminalRows(stats);
+  // Spread the info rows over the portrait's height so the right column doesn't stop short.
+  const line = Math.max(TERM.line, (art.length * TERM.artLine) / rows.length);
   const width = Math.ceil(infoX + TERM.infoCols * cw + pad);
-  const height = pad * 2 + Math.max(rows.length * TERM.line, art.length * TERM.artLine);
-  const baseline = (i) => pad + TERM.font + i * TERM.line;
+  const height = pad * 2 + Math.max(rows.length * line, art.length * TERM.artLine);
+  const baseline = (i) => pad + TERM.font + i * line;
 
   const artText = art
     .map((line, i) => `<text x="${pad}" y="${pad + TERM.artFont + i * TERM.artLine}" class="art">${esc(line)}</text>`)
