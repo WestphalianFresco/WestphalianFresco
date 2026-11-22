@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="840" height="195" viewBox="0 0 840 195" role="img" aria-labelledby="t d">
 <title id="t">At a glance</title>
-<desc id="d">445 contributions in the last 12 months, current streak 13 days, longest streak 26 days, 584 contributions since 2020.</desc>
+<desc id="d">445 contributions in the last 12 months, current streak 0 days, longest streak 26 days, 584 contributions since 2020.</desc>
 <style>
 .sans{font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans&quot;,Helvetica,Arial,sans-serif}
 .ink{fill:#1f2328}.ink2{fill:#59636e}.muted{fill:#818b98}
@@ -12,7 +12,7 @@
 <text x="24" y="38" class="sans h ink">At a glance</text>
 <line x1="275.5" x2="275.5" y1="57" y2="131" stroke="#eff2f5"/><line x1="451.5" x2="451.5" y1="57" y2="131" stroke="#eff2f5"/><line x1="627.5" x2="627.5" y1="57" y2="131" stroke="#eff2f5"/>
 <text x="24" y="69" class="sans sub ink2">Contributions</text><text x="24" y="103" class="sans ink"><tspan font-size="32" font-weight="600">445</tspan></text><line x1="155" x2="260" y1="103.5" y2="103.5" stroke="#d1d9e0"/><path d="M182,103V103Q182,101 184,101H186Q188,101 188,103V103Z" fill="#c8d1da"/><path d="M191,103V102.46610169491525Q191,100.46610169491525 193,100.46610169491525H195Q197,100.46610169491525 197,102.46610169491525V103Z" fill="#c8d1da"/><path d="M200,103V103Q200,101 202,101H204Q206,101 206,103V103Z" fill="#c8d1da"/><path d="M227,103V100.8135593220339Q227,98.8135593220339 229,98.8135593220339H231Q233,98.8135593220339 233,100.8135593220339V103Z" fill="#c8d1da"/><path d="M236,103V96.73728813559322Q236,94.73728813559322 238,94.73728813559322H240Q242,94.73728813559322 242,96.73728813559322V103Z" fill="#c8d1da"/><path d="M245,103V99.71186440677965Q245,97.71186440677965 247,97.71186440677965H249Q251,97.71186440677965 251,99.71186440677965V103Z" fill="#c8d1da"/><path d="M254,103V79Q254,77 256,77H258Q260,77 260,79V103Z" fill="#1a7f37"/><text x="24" y="127" class="sans muted" font-size="11">last 12 months, by month</text>
-<text x="288" y="69" class="sans sub ink2">Current streak</text><text x="288" y="103" class="sans ink"><tspan font-size="32" font-weight="600">13</tspan><tspan font-size="14" class="ink2" dx="6">days</tspan></text><text x="288" y="127" class="sans muted" font-size="11">since Nov 8</text>
+<text x="288" y="69" class="sans sub ink2">Current streak</text><text x="288" y="103" class="sans ink"><tspan font-size="32" font-weight="600">0</tspan><tspan font-size="14" class="ink2" dx="6">days</tspan></text><text x="288" y="127" class="sans muted" font-size="11">start one today</text>
 <text x="464" y="69" class="sans sub ink2">Longest streak</text><text x="464" y="103" class="sans ink"><tspan font-size="32" font-weight="600">26</tspan><tspan font-size="14" class="ink2" dx="6">days</tspan></text><text x="464" y="127" class="sans muted" font-size="11">Sep 14 – Oct 9, 2026</text>
 <text x="640" y="69" class="sans sub ink2">All-time</text><text x="640" y="103" class="sans ink"><tspan font-size="32" font-weight="600">584</tspan></text><text x="640" y="127" class="sans muted" font-size="11">contributions since 2020</text>
 <line x1="24" x2="816" y1="151.5" y2="151.5" stroke="#eff2f5"/>
